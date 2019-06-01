@@ -128,25 +128,31 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
+            <plugin>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <executions>
+                <execution>
+                    <id>sonar-properties-replacement</id>
+                    <phase>compile</phase>
+                    <configuration>
+                        <target>
+                            <propertyfile file="${basedir}/sonar-project.properties">
+                                <entry key="sonar.projectName" value="${project.name}" />
+                                <entry key="sonar.projectKey" value="${project.artifactId}" />
+                                <entry key="sonar.projectVersion" value="${project.version}" />
+                                <entry key="sonar.java.source" value="${java.version}" />
+                                <entry key="sonar.java.target" value="${java.version}" />
+                            </propertyfile>
+                            <replaceregexp file="${basedir}/sonar-project.properties" match="^#.*\n" replace=""/>
+                        </target>
+                    </configuration>
+                    <goals>
+                        <goal>run</goal>
+                    </goals>
+                </execution>
+            </executions>
+            </plugin>
         </plugins>
-        <resources>
-            <resource>
-                <directory>${project.basedir}</directory>
-                <includes>
-                    <!-- To replace placeholders in sonar-project.properties -->
-                    <include>sonar-project.properties</include>
-                </includes>
-                <filtering>true</filtering>
-            </resource>
-            <resource>
-                <!-- To process default resources located in src/main/resources folder of your project-->
-                <directory>${project.basedir}/src/main/resources</directory>
-                <includes>
-                    <include>*.*</include>
-                </includes>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
     </build>
 
 </project>
