@@ -38,8 +38,10 @@ pipeline {
               }
             }
         stage ("Extract test results") {
-            cobertura coberturaReportFile: 'path-to/coverage.xml'
+        steps{
+            cobertura coberturaReportFile: 'target/site/corbetura/coverage.xml'
         }
+
 
     }
 
