@@ -37,12 +37,13 @@ pipeline {
                 }
               }
             }
-        stage ("Extract test results") {
-        steps{
-            cobertura coberturaReportFile: 'target/site/corbetura/coverage.xml'
-        }
-
 
     }
+    post {
+            always {
+                junit '**/nosetests.xml'
+                step([$class: 'CoberturaPublisher', autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: '**/coverage.xml', failUnhealthy: false, failUnstable: false, maxNumberOfBuilds: 0, onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false])
+            }
+        }
 
          }
