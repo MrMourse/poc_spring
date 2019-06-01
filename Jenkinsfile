@@ -17,13 +17,28 @@ pipeline {
 
         stage ('Build') {
             steps {
-                sh 'mvn -Dmaven.test.failure.ignore=true install'
+                sh 'mvn install'
             }
             post {
                 success {
                     junit 'target/surefire-reports/**/*.xml'
                 }
             }
+        }
+        stage('SonarQubeScanner') {
+          steps {
+             withSonarQubeEnv 'sonar'
+          }
+       }
+
+
+        stage('Archive artifacts') {
+           archiveArtifacts artifacts: '**/target/*.jar'
+           cleanWs()
+        }
+
+        stage('Publish build info') {
+                server.publishBuildInfo buildInfo
         }
     }
   }
