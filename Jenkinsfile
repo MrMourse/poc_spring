@@ -30,15 +30,5 @@ pipeline {
              withSonarQubeEnv 'sonar'
           }
        }
-
-
-        stage('Archive artifacts') {
-           archiveArtifacts artifacts: '**/target/*.jar'
-           cleanWs()
-        }
-
-        stage('Publish build info') {
-                server.publishBuildInfo buildInfo
-        }
     }
   }
