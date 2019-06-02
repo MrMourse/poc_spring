@@ -1,15 +1,7 @@
 #!/usr/bin/env groovy
 pipeline {
 
-    def server = Artifactory.server('artifactory')
-    def uploadSpec = """{
-      "files": [
-        {
-          "pattern": "**/target/*.jar",
-          "target": "libs-snapshot-local"
-        }
-     ]
-    }"""
+
     agent any
     tools {
         maven 'maven'
@@ -54,6 +46,15 @@ pipeline {
             }
         stage('Upload Artifact') {
             steps {
+                def server = Artifactory.server('artifactory')
+                def uploadSpec = """{
+                  "files": [
+                    {
+                      "pattern": "**/target/*.jar",
+                      "target": "libs-snapshot-local"
+                    }
+                 ]
+                }"""
                  server.upload(uploadSpec)
             }
         }
