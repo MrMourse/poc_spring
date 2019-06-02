@@ -6,7 +6,6 @@ import com.example.demo.models.task.TaskEntity;
 import com.example.demo.repositories.TaskRepository;
 import org.apache.commons.collections4.IteratorUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -45,11 +44,10 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public TaskBO saveOrUpdateTask(TaskBO task) {
+    public void saveOrUpdateTask(TaskBO task) {
         //Check if we make a modification
         TaskEntity taskToSave = TaskMapper.INSTANCE.BOtoEntity(task);
         taskRepository.save(taskToSave);
-        return task;
     }
 
     @Override

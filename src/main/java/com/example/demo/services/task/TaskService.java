@@ -14,7 +14,7 @@ public interface TaskService {
 
     TaskBO getTaskByTitle(String title) ;
 
-    TaskBO saveOrUpdateTask(TaskBO task) ;
+    void saveOrUpdateTask(TaskBO task) ;
 
     void deleteTask(Long id) ;
 

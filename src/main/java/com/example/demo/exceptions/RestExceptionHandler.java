@@ -1,11 +1,7 @@
 package com.example.demo.exceptions;
 
-import ch.qos.logback.classic.Logger;
-import com.example.demo.controllers.UserController;
 import com.example.demo.models.response.ResponseNotFoundDTO;
-import com.example.demo.models.response.ResponseTaskDTO;
 import com.example.demo.models.response.StatusJSEND;
-import org.omg.PortableInterceptor.SUCCESSFUL;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -185,7 +181,11 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleMethodArgumentTypeMismatch(MethodArgumentTypeMismatchException ex,
                                                                       WebRequest request) {
         ApiError apiError = new ApiError(BAD_REQUEST);
-        apiError.setMessage(String.format("The parameter '%s' of value '%s' could not be converted to type '%s'", ex.getName(), ex.getValue(), ex.getRequiredType().getSimpleName()));
+        String type = "Not found";
+        if (ex.getRequiredType() != null){
+            type = ex.getRequiredType().getSimpleName();
+        }
+        apiError.setMessage(String.format("The parameter '%s' of value '%s' could not be converted to type '%s'", ex.getName(), ex.getValue(), type));
         apiError.setDebugMessage(ex.getMessage());
         return buildResponseEntity(apiError);
     }

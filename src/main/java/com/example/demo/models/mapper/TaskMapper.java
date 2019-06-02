@@ -4,13 +4,10 @@ import com.example.demo.models.task.TaskBO;
 import com.example.demo.models.task.TaskDTO;
 import com.example.demo.models.task.TaskEntity;
 
-import com.example.demo.models.user.UserBO;
-import com.example.demo.models.user.UserEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
-import java.util.Optional;
 
 @Mapper
 public interface TaskMapper {

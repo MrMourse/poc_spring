@@ -1,8 +1,6 @@
 package com.example.demo.exceptions;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
 import org.hibernate.validator.internal.engine.path.PathImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -90,15 +88,13 @@ class ApiError {
         addSubError(new ApiValidationError(object, field, rejectedValue, message));
     }
 
-    private void addValidationError(String objectName, String object, Object rejectedValue, String message) {
+    private void addValidationError(String object, String message) {
         addSubError(new ApiValidationError(object, message));
     }
 
     private void addValidationError(FieldError fieldError) {
         this.addValidationError(
-                fieldError.getObjectName(),
                 fieldError.getField(),
-                fieldError.getRejectedValue(),
                 fieldError.getDefaultMessage());
     }
 
@@ -108,11 +104,11 @@ class ApiError {
 
     private void addValidationError(ObjectError objectError) {
         this.addValidationError(
-                objectError.getObjectName(),
-                objectError.getDefaultMessage());
+                objectError.getObjectName()
+        );
     }
 
-    private void addValidationError(String objectName, String defaultMessage) {
+    private void addValidationError(String objectName) {
         addSubError(new ApiValidationError(objectName, message));
     }
 
@@ -132,9 +128,7 @@ class ApiError {
      */
     private void addValidationError(ConstraintViolation<?> cv) {
         this.addValidationError(
-                cv.getRootBeanClass().getSimpleName(),
                 ((PathImpl) cv.getPropertyPath()).getLeafNode().asString(),
-                cv.getInvalidValue(),
                 cv.getMessage());
     }
 

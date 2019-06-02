@@ -1,10 +1,6 @@
 package com.example.demo.models.response;
 
-import com.example.demo.models.task.TaskDTO;
-import org.springframework.util.StringUtils;
-
 import java.util.List;
-import java.util.Map;
 
 public class ResponseNotFoundDTO extends ResponseDTO {
     private List<Object> data;

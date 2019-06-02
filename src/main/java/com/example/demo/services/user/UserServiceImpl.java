@@ -6,7 +6,6 @@ import com.example.demo.models.user.UserEntity;
 import com.example.demo.repositories.UserRepository;
 import org.apache.commons.collections4.IteratorUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
