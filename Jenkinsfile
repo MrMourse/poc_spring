@@ -1,6 +1,7 @@
 #!/usr/bin/env groovy
 pipeline {
     agent any
+    def rtMaven = Artifactory.newMavenBuild()
     tools {
         maven 'maven'
         jdk 'jdk8'
@@ -42,6 +43,16 @@ pipeline {
                     archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
                 }
             }
+        stage('Upload Artifact') {
+            steps {
+                 script {
+                        def server = Artifactory.newServer url: 'http://localhost:8081/artifactory'
+                        server.bypassProxy = true
+                        def buildInfo = server.upload spec: uploadSpec
+                        }
+                }
+            }
+        }
 
     }
     post {
