@@ -52,7 +52,7 @@ public class UserControllerTest {
     @Test
     public void testFindAllUsers() throws Exception {
 
-        MvcResult result = mockMvc.perform(get("/users/")
+        mockMvc.perform(get("/users/")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isFound())    //statut HTTP de la réponse
                 .andExpect(jsonPath("$.data").value(hasSize(1)))

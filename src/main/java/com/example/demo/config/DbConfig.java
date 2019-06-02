@@ -45,14 +45,17 @@ public class DbConfig {
 
     private Properties additionalProperties() {
         final Properties hibernateProperties = new Properties();
-        if (env.getProperty("hibernate.hbm2ddl.auto") != null) {
-            hibernateProperties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+        String hbm = "hibernate.hbm2ddl.auto";
+        if (env.getProperty(hbm) != null) {
+            hibernateProperties.setProperty(hbm, env.getProperty(hbm));
         }
-        if (env.getProperty("hibernate.dialect") != null) {
-            hibernateProperties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
+        String dialect = "hibernate.dialect";
+        if (env.getProperty(dialect) != null) {
+            hibernateProperties.setProperty(dialect, env.getProperty(dialect));
         }
-        if (env.getProperty("hibernate.show_sql") != null) {
-            hibernateProperties.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+        String showSql = "hibernate.show_sql";
+        if (env.getProperty(showSql) != null) {
+            hibernateProperties.setProperty(showSql, env.getProperty(showSql));
         }
         return hibernateProperties;
     }

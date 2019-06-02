@@ -10,7 +10,7 @@ public enum StatusJSEND {
     FAIL ("fail"),
 
     //An error occurred in processing the request, i.e. an exception was thrown
-    error ("error");
+    ERROR ("error");
 
     private final String name;
 

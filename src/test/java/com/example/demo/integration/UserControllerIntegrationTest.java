@@ -44,6 +44,8 @@ public class UserControllerIntegrationTest {
     private String getURLWithPort(String uri) {
         return URL + port + uri;
     }
+
+    private static String good = "Good :";
     @Test
     public void testFindAllUsers() {
         ResponseEntity<ResponseUserDTO> responseEntity = restTemplate.getForEntity(getURLWithPort("/users"), ResponseUserDTO.class);
@@ -52,7 +54,7 @@ public class UserControllerIntegrationTest {
 
 
         // On vérifie le code de réponse HTTP, en cas de différence entre les deux valeurs, le message "Réponse inattendue" est affiché
-        assertEquals("Réponse correcte :", HttpStatus.FOUND.value(), responseEntity.getStatusCodeValue());
+        assertEquals(good, HttpStatus.FOUND.value(), responseEntity.getStatusCodeValue());
 
         assertNotNull(userCollections);
         logger.info("Utilisateur trouvé : " + userCollections.toString());
@@ -66,7 +68,7 @@ public class UserControllerIntegrationTest {
         UserDTO userSaved = Objects.requireNonNull(userEntitySaved.getBody()).getData().get(0);
         assertNotNull(userSaved);
         assertEquals(user.getName(),userSaved.getName());
-        assertEquals("Réponse correcte :", HttpStatus.CREATED.value(), userEntitySaved.getStatusCodeValue());
+        assertEquals(good, HttpStatus.CREATED.value(), userEntitySaved.getStatusCodeValue());
     }
 
     @Test
@@ -78,7 +80,7 @@ public class UserControllerIntegrationTest {
                 null,
                 ResponseDTO.class,
                 variables);
-        assertEquals("Réponse correcte :", HttpStatus.GONE.value(), responseEntity.getStatusCodeValue());
+        assertEquals(good, HttpStatus.GONE.value(), responseEntity.getStatusCodeValue());
     }
 
     @Test
@@ -95,6 +97,6 @@ public class UserControllerIntegrationTest {
                 requestEntity,
                 ResponseUserDTO.class,
                 variables);
-        assertEquals("Réponse correcte :", HttpStatus.OK.value(), responseEntity.getStatusCodeValue());
+        assertEquals(good, HttpStatus.OK.value(), responseEntity.getStatusCodeValue());
     }
 }
