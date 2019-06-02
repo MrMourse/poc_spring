@@ -52,7 +52,7 @@ pipeline {
                       "files": [
                         {
                           "pattern": "**/target/*.jar",
-                          "target": "libs-snapshot-local"
+                          "target": "**/target/*.jar"
                         }
                      ]
                     }"""

@@ -9,7 +9,6 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 public class DemoApplication {
     //TODO : Check Error (Enum, controle des erreurs possibles)
     //TODO : Check Tests
-    //TODO : pipeline jenkinsfile
     //TODO : Implement test on tasks
 
     public static void main(String[] args) {
