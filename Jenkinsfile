@@ -1,7 +1,6 @@
 #!/usr/bin/env groovy
 pipeline {
     agent any
-    def rtMaven = Artifactory.newMavenBuild()
     tools {
         maven 'maven'
         jdk 'jdk8'
