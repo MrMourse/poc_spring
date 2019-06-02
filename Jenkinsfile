@@ -52,7 +52,7 @@ pipeline {
                       "files": [
                         {
                           "pattern": "**/target/*.jar",
-                          "target": "**/target/*.jar"
+                          "target": "example-repo-local"
                         }
                      ]
                     }"""
