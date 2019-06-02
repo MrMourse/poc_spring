@@ -10,15 +10,15 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 @Mapper
-public interface TaskMapper {
+public abstract class TaskMapper {
 
-    TaskMapper INSTANCE = Mappers.getMapper( TaskMapper.class );
+    public static final TaskMapper INSTANCE = Mappers.getMapper( TaskMapper.class );
 
-    TaskBO entityToBO(TaskEntity task);
-    TaskEntity BOtoEntity(TaskBO task);
-    List<TaskBO> entitiesToBOs(List<TaskEntity> tasks);
-    TaskDTO BOToDTO(TaskBO task);
-    TaskBO DTOToBO(TaskDTO task);
-    List<TaskDTO> BOsToDTOs(List<TaskBO> tasks);
+    public abstract TaskBO entityToBo(TaskEntity task);
+    public abstract TaskEntity boToEntity(TaskBO task);
+    public abstract List<TaskBO> entitiesToBos(List<TaskEntity> tasks);
+    public abstract TaskDTO boToDto(TaskBO task);
+    public abstract TaskBO dtoToBo(TaskDTO task);
+    public abstract List<TaskDTO> bosToDtos(List<TaskBO> tasks);
 }
 

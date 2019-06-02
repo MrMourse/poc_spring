@@ -22,7 +22,7 @@ public class TaskServiceImpl implements TaskService {
     public List<TaskBO> getAllTasks() {
         List<TaskEntity> taskEntitiesFound
                 = IteratorUtils.toList(taskRepository.findAll().iterator());
-        return TaskMapper.INSTANCE.entitiesToBOs(taskEntitiesFound);
+        return TaskMapper.INSTANCE.entitiesToBos(taskEntitiesFound);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class TaskServiceImpl implements TaskService {
         if (!taskFound.isPresent()){
             throw new EntityNotFoundException("Didn't find a task with id" + id);
         }
-        return TaskMapper.INSTANCE.entityToBO(taskFound.get());
+        return TaskMapper.INSTANCE.entityToBo(taskFound.get());
     }
 
     @Override
@@ -40,13 +40,13 @@ public class TaskServiceImpl implements TaskService {
         if (!taskFound.isPresent()){
             throw new EntityNotFoundException("Didn't find a task with title " + title);
         }
-        return TaskMapper.INSTANCE.entityToBO(taskFound.get());
+        return TaskMapper.INSTANCE.entityToBo(taskFound.get());
     }
 
     @Override
     public void saveOrUpdateTask(TaskBO task) {
         //Check if we make a modification
-        TaskEntity taskToSave = TaskMapper.INSTANCE.BOtoEntity(task);
+        TaskEntity taskToSave = TaskMapper.INSTANCE.boToEntity(task);
         taskRepository.save(taskToSave);
     }
 

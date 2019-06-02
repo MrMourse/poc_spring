@@ -2,10 +2,11 @@ package com.example.demo.controllers;
 
 import com.example.demo.models.user.UserBO;
 import com.example.demo.services.user.UserService;
-import javassist.NotFoundException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -30,6 +31,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebAppConfiguration
 public class UserControllerTest {
 
+    private static final Logger logger = LoggerFactory.getLogger(UserControllerTest.class);
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -50,31 +53,39 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testFindAllUsers() throws Exception {
+    public void testFindAllUsers(){
 
-        mockMvc.perform(get("/users/")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isFound())    //statut HTTP de la réponse
-                .andExpect(jsonPath("$.data").value(hasSize(1)))
-                .andExpect(jsonPath("$.data[0].name").value(user.getName()))
-                .andReturn();
+        try {
+            mockMvc.perform(get("/users/")
+                    .contentType(MediaType.APPLICATION_JSON))
+                    .andExpect(status().isFound())    //statut HTTP de la réponse
+                    .andExpect(jsonPath("$.data").value(hasSize(1)))
+                    .andExpect(jsonPath("$.data[0].name").value(user.getName()))
+                    .andReturn();
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
         //on s'assure que la méthode de service getAllUsers() a bien été appelée
         verify(userService).getAllUsers();
     }
 
     @Test
-    public void testSaveUser() throws Exception {
+    public void testSaveUser() {
 
         given(userService.getUserByName("Dupont")).willReturn(null);
         //on exécute la requête
-        mockMvc.perform(MockMvcRequestBuilders.post("/users/")
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)
-                .content("{\n" +
-                        "    \"name\": \"testa\",\n" +
-                        "    \"mail\": \"test@gmail.com\"\n" +
-                        "}"))
-                .andExpect(status().isCreated());
+        try {
+            mockMvc.perform(MockMvcRequestBuilders.post("/users/")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .accept(MediaType.APPLICATION_JSON)
+                    .content("{\n" +
+                            "    \"name\": \"testa\",\n" +
+                            "    \"mail\": \"test@gmail.com\"\n" +
+                            "}"))
+                    .andExpect(status().isCreated());
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
 
         //on s'assure que la méthode de service saveOrUpdateUser(User) a bien été appelée
         verify(userService).saveOrUpdateUser(any(UserBO.class));
@@ -82,23 +93,31 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testDeleteUser() throws Exception {
+    public void testDeleteUser(){
         // on exécute le test
-        mockMvc.perform(MockMvcRequestBuilders.delete("/users/{id}", 1))
-                .andExpect(status().isGone());
+        try {
+            mockMvc.perform(MockMvcRequestBuilders.delete("/users/{id}", 1))
+                    .andExpect(status().isGone());
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
 
         // On vérifie que la méthode de service deleteUser(Id) a bien été appelée
         verify(userService).deleteUser(any(Long.class));
     }
 
     @Test
-    public void testUpdateUser() throws Exception {
+    public void testUpdateUser(){
 
         //on exécute la requête
-        mockMvc.perform(MockMvcRequestBuilders.put("/users/{id}",1)
-                .contentType(MediaType.APPLICATION_XML)
-                .content("<user><name>Test</name></user>"))
-                .andExpect(status().isOk());
+        try {
+            mockMvc.perform(MockMvcRequestBuilders.put("/users/{id}",1)
+                    .contentType(MediaType.APPLICATION_XML)
+                    .content("<user><name>Test</name></user>"))
+                    .andExpect(status().isOk());
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
 
         //on s'assure que la méthode de service saveOrUpdateUser(User) a bien été appelée
         verify(userService).saveOrUpdateUser(any(UserBO.class));

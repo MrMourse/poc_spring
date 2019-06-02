@@ -33,7 +33,7 @@ public class TaskController {
     @GetMapping(value = "")
     public ResponseEntity<ResponseTaskDTO> getAllTasks() {
         List<TaskBO> tasks = taskService.getAllTasks();
-        List<TaskDTO> tasksDTO = TaskMapper.INSTANCE.BOsToDTOs(tasks);
+        List<TaskDTO> tasksDTO = TaskMapper.INSTANCE.bosToDtos(tasks);
         logger.info("liste des tâches : " + tasks.toString());
         ResponseTaskDTO response = new ResponseTaskDTO(StatusJSEND.SUCCESS, tasksDTO);
         return new ResponseEntity<>(response, HttpStatus.FOUND);
@@ -42,7 +42,7 @@ public class TaskController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<ResponseTaskDTO> getTask(@PathVariable(value = "id") Long id) {
         TaskBO taskToGet = taskService.getTaskById(id);
-        TaskDTO taskDTO = TaskMapper.INSTANCE.BOToDTO(taskToGet);
+        TaskDTO taskDTO = TaskMapper.INSTANCE.boToDto(taskToGet);
         logger.info("UPDATE USER : "+ taskToGet.getTitle());
         ResponseTaskDTO response = new ResponseTaskDTO(StatusJSEND.SUCCESS, Collections.singletonList(taskDTO));
         return new ResponseEntity<>(response, HttpStatus.FOUND);
@@ -53,7 +53,7 @@ public class TaskController {
     @GetMapping(value = "/title/{title}")
     public ResponseEntity<ResponseTaskDTO> getTaskByTitle(@PathVariable(value = "title") String title) {
         TaskBO taskToGet = taskService.getTaskByTitle(title);
-        TaskDTO taskDTO = TaskMapper.INSTANCE.BOToDTO(taskToGet);
+        TaskDTO taskDTO = TaskMapper.INSTANCE.boToDto(taskToGet);
         logger.info("UPDATE TASK : "+ taskToGet.getTitle());
         ResponseTaskDTO response = new ResponseTaskDTO(StatusJSEND.SUCCESS, Collections.singletonList(taskDTO));
         return new ResponseEntity<>(response, HttpStatus.FOUND);
@@ -62,7 +62,7 @@ public class TaskController {
 
     @PostMapping(value = "")
     public ResponseEntity<ResponseTaskDTO> saveTask(@RequestBody TaskDTO task) {
-        TaskBO taskToInsert = TaskMapper.INSTANCE.DTOToBO(task);
+        TaskBO taskToInsert = TaskMapper.INSTANCE.dtoToBo(task);
         taskService.saveOrUpdateTask(taskToInsert);
         logger.info("userSave : " + taskToInsert.toString());
         ResponseTaskDTO response = new ResponseTaskDTO(StatusJSEND.SUCCESS, Collections.singletonList(task));
@@ -75,7 +75,7 @@ public class TaskController {
         if (id != task.getId()){
             task.setId(id);
         }
-        TaskBO taskToUpdate = TaskMapper.INSTANCE.DTOToBO(task);
+        TaskBO taskToUpdate = TaskMapper.INSTANCE.dtoToBo(task);
         taskService.saveOrUpdateTask(taskToUpdate);
         ResponseTaskDTO response = new ResponseTaskDTO(StatusJSEND.SUCCESS, Collections.singletonList(task));
         return new ResponseEntity<>(response, HttpStatus.OK);

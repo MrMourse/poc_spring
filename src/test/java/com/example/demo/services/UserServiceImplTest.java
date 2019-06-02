@@ -50,7 +50,7 @@ public class UserServiceImplTest {
     @Test
     public void testFindAllUsers() {
         List<UserEntity> allUsers = Collections.singletonList(user);
-        List<UserBO> allUsersExpected = UserMapper.INSTANCE.entitiesToBOs(allUsers);
+        List<UserBO> allUsersExpected = UserMapper.INSTANCE.entitiesToBos(allUsers);
         Mockito.when(userRepository.findAll()).thenReturn(allUsers);
 
         List<UserBO> users = userService.getAllUsers();
@@ -85,7 +85,7 @@ public class UserServiceImplTest {
     @Test
     public void testUpdateUser() {
         UserBO userToUpdate = new UserBO("Paul", "mail");
-        UserEntity userEntityToUpdate = UserMapper.INSTANCE.BOtoEntity(userToUpdate);
+        UserEntity userEntityToUpdate = UserMapper.INSTANCE.boToEntity(userToUpdate);
         Mockito.when(userRepository.save((userEntityToUpdate))).thenReturn(userEntityToUpdate);
         UserBO userFromDB = userService.saveOrUpdateUser(userToUpdate);
         assertNotNull(userFromDB);

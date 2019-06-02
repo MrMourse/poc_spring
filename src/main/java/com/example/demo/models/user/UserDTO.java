@@ -17,17 +17,6 @@ public class UserDTO implements Serializable {
         super();
     }
 
-    public UserDTO(String name, String mail) {
-        this.name = name;
-        this.mail = mail;
-    }
-
-    public UserDTO(long id, String name, String mail) {
-        this.id = id;
-        this.name = name;
-        this.mail = mail;
-    }
-
     public long getId() {
         return id;
     }

@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
     public List<UserBO> getAllUsers(){
         List<UserEntity> userEntitiesFound
                 = IteratorUtils.toList(userRepository.findAll().iterator());
-        return UserMapper.INSTANCE.entitiesToBOs(userEntitiesFound);
+        return UserMapper.INSTANCE.entitiesToBos(userEntitiesFound);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
         if( !userFound.isPresent()){
             throw new EntityNotFoundException("Didn't find a user with id " + id);
         }
-        return UserMapper.INSTANCE.entityToBO(userFound.get());
+        return UserMapper.INSTANCE.entityToBo(userFound.get());
     }
 
     @Override
@@ -40,13 +40,13 @@ public class UserServiceImpl implements UserService {
         if(!userFound.isPresent()){
             throw new EntityNotFoundException("Didn't find a user with name " + name);
         }
-        return UserMapper.INSTANCE.entityToBO(userFound.get());
+        return UserMapper.INSTANCE.entityToBo(userFound.get());
     }
 
     @Override
     public UserBO saveOrUpdateUser(UserBO user) {
         //Check if we make a modification
-        UserEntity userToSave = UserMapper.INSTANCE.BOtoEntity(user);
+        UserEntity userToSave = UserMapper.INSTANCE.boToEntity(user);
         userRepository.save(userToSave);
         return user;
     }

@@ -33,7 +33,7 @@ public class UserController {
     @GetMapping(value = "")
     public ResponseEntity<ResponseUserDTO> getAllUsers() {
         List<UserBO> users = userService.getAllUsers();
-        List<UserDTO> usersDTO = UserMapper.INSTANCE.BOsToDTOs(users);
+        List<UserDTO> usersDTO = UserMapper.INSTANCE.bosToDtos(users);
         logger.info("liste des utilisateurs : " + users.toString());
         ResponseUserDTO response = new ResponseUserDTO(StatusJSEND.SUCCESS, usersDTO);
         return new ResponseEntity<>(response, HttpStatus.FOUND);
@@ -42,7 +42,7 @@ public class UserController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<ResponseUserDTO> getUser(@PathVariable(value = "id") Long id) {
         UserBO userToGet = userService.getUserById(id);
-        UserDTO userDTO = UserMapper.INSTANCE.BOToDTO(userToGet);
+        UserDTO userDTO = UserMapper.INSTANCE.boToDto(userToGet);
         logger.info("UPDATE USER : "+ userToGet.getName());
         ResponseUserDTO response = new ResponseUserDTO(StatusJSEND.SUCCESS, Collections.singletonList(userDTO));
         return new ResponseEntity<>(response, HttpStatus.FOUND);
@@ -51,7 +51,7 @@ public class UserController {
     @GetMapping(value = "/name/{name}")
     public ResponseEntity<ResponseUserDTO> getUserByName(@PathVariable(value = "name") String name) {
         UserBO userToGet = userService.getUserByName(name);
-        UserDTO userDTO = UserMapper.INSTANCE.BOToDTO(userToGet);
+        UserDTO userDTO = UserMapper.INSTANCE.boToDto(userToGet);
         logger.info("UPDATE USER : "+ userToGet.getName());
         ResponseUserDTO response = new ResponseUserDTO(StatusJSEND.SUCCESS, Collections.singletonList(userDTO));
         return new ResponseEntity<>(response, HttpStatus.FOUND);
@@ -59,7 +59,7 @@ public class UserController {
 
     @PostMapping(value = "")
     public ResponseEntity<ResponseUserDTO> saveUser(@RequestBody UserDTO user) {
-        UserBO userToInsert= UserMapper.INSTANCE.DTOToBO(user);
+        UserBO userToInsert= UserMapper.INSTANCE.dtoToBo(user);
         userService.saveOrUpdateUser(userToInsert);
         logger.info("userSave : " + userToInsert.toString());
         ResponseUserDTO response = new ResponseUserDTO(StatusJSEND.SUCCESS, Collections.singletonList(user));
@@ -72,7 +72,7 @@ public class UserController {
         if (user.getId() != id){
             user.setId(id);
         }
-        UserBO userToUpdate = UserMapper.INSTANCE.DTOToBO(user);
+        UserBO userToUpdate = UserMapper.INSTANCE.dtoToBo(user);
         userService.saveOrUpdateUser(userToUpdate);
         ResponseUserDTO response = new ResponseUserDTO(StatusJSEND.SUCCESS, Collections.singletonList(user));
         return new ResponseEntity<>(response, HttpStatus.OK);

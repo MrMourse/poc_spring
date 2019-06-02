@@ -9,15 +9,15 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 @Mapper
-public interface UserMapper {
+public abstract class UserMapper {
 
-    UserMapper INSTANCE = Mappers.getMapper( UserMapper.class );
+    public static final UserMapper INSTANCE = Mappers.getMapper( UserMapper.class );
 
-    UserBO entityToBO(UserEntity user);
-    UserEntity BOtoEntity(UserBO user);
-    List<UserBO> entitiesToBOs(List<UserEntity> users);
-    UserDTO BOToDTO(UserBO user);
-    UserBO DTOToBO(UserDTO user);
-    List<UserDTO> BOsToDTOs(List<UserBO> users);
+    public abstract UserBO entityToBo(UserEntity user);
+    public abstract UserEntity boToEntity(UserBO user);
+    public abstract List<UserBO> entitiesToBos(List<UserEntity> users);
+    public abstract UserDTO boToDto(UserBO user);
+    public abstract UserBO dtoToBo(UserDTO user);
+    public abstract List<UserDTO> bosToDtos(List<UserBO> users);
 
 }
