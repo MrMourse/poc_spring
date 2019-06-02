@@ -46,16 +46,18 @@ pipeline {
             }
         stage('Upload Artifact') {
             steps {
-                def server = Artifactory.server('artifactory')
-                def uploadSpec = """{
-                  "files": [
-                    {
-                      "pattern": "**/target/*.jar",
-                      "target": "libs-snapshot-local"
-                    }
-                 ]
-                }"""
-                 server.upload(uploadSpec)
+                script {
+                    def server = Artifactory.server('artifactory')
+                    def uploadSpec = """{
+                      "files": [
+                        {
+                          "pattern": "**/target/*.jar",
+                          "target": "libs-snapshot-local"
+                        }
+                     ]
+                    }"""
+                     server.upload(uploadSpec)
+                     }
             }
         }
         stage ('Publish build info') {
