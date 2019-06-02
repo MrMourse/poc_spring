@@ -1,6 +1,5 @@
 package com.example.demo.services.user;
 
-import com.example.demo.exceptions.BusinessResourceException;
 import com.example.demo.models.user.UserBO;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,14 +8,14 @@ import java.util.List;
 @Configuration
 public interface UserService {
 
-    List<UserBO> getAllUsers() throws BusinessResourceException;
+    List<UserBO> getAllUsers() ;
 
-    UserBO getUserById(Long id) throws BusinessResourceException;
+    UserBO getUserById(Long id) ;
 
-    UserBO getUserByName(String name) throws BusinessResourceException;
+    UserBO getUserByName(String name) ;
 
-    UserBO saveOrUpdateUser(UserBO user) throws BusinessResourceException;
+    UserBO saveOrUpdateUser(UserBO user) ;
 
-    void deleteUser(Long id) throws BusinessResourceException;
+    void deleteUser(Long id) ;
 
 }

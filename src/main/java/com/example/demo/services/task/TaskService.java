@@ -1,6 +1,5 @@
 package com.example.demo.services.task;
 
-import com.example.demo.exceptions.BusinessResourceException;
 import com.example.demo.models.task.TaskBO;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,14 +8,14 @@ import java.util.List;
 @Configuration
 public interface TaskService {
 
-    List<TaskBO> getAllTasks() throws BusinessResourceException;
+    List<TaskBO> getAllTasks() ;
 
-    TaskBO getTaskById(Long id) throws BusinessResourceException;
+    TaskBO getTaskById(Long id) ;
 
-    TaskBO getTaskByTitle(String title) throws BusinessResourceException;
+    TaskBO getTaskByTitle(String title) ;
 
-    TaskBO saveOrUpdateTask(TaskBO task) throws BusinessResourceException;
+    TaskBO saveOrUpdateTask(TaskBO task) ;
 
-    void deleteTask(Long id) throws BusinessResourceException;
+    void deleteTask(Long id) ;
 
 }

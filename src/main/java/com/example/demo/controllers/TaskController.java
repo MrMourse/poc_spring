@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @CrossOrigin(origins = "http://localhost:8080", maxAge = 3600)
@@ -46,6 +47,8 @@ public class TaskController {
         logger.info("UPDATE USER : "+ taskToGet.getTitle());
         ResponseTaskDTO response = new ResponseTaskDTO(StatusJSEND.SUCCESS, Collections.singletonList(taskDTO));
         return new ResponseEntity<>(response, HttpStatus.FOUND);
+
+
     }
 
     @GetMapping(value = "/title/{title}")
@@ -55,6 +58,7 @@ public class TaskController {
         logger.info("UPDATE TASK : "+ taskToGet.getTitle());
         ResponseTaskDTO response = new ResponseTaskDTO(StatusJSEND.SUCCESS, Collections.singletonList(taskDTO));
         return new ResponseEntity<>(response, HttpStatus.FOUND);
+
     }
 
     @PostMapping(value = "")
