@@ -43,8 +43,7 @@ pipeline {
             always {
                 cobertura coberturaReportFile: "**/target/site/cobertura/coverage.xml"
                 cleanWs()
-                archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
-                            junit 'build/reports/**/*.xml'
+                archiveArtifacts artifacts: 'build/libs/**/*.jar'
             }
         }
 
