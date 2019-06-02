@@ -40,10 +40,11 @@ pipeline {
 
     }
     post {
-
-      always {
-        cobertura coberturaReportFile: '**/target/site/cobertura/coverage.xml'
+            always {
+                junit "**/xunit.xml"
+                cobertura coberturaReportFile: "**/cobertura-coverage.xml"
+                cleanWs()
+            }
         }
-    }
 
          }
