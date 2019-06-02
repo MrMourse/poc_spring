@@ -44,12 +44,18 @@ pipeline {
             }
         stage('Upload Artifact') {
             steps {
-                 script {
-                        def server = Artifactory.newServer url: 'http://localhost:8081/artifactory'
-                        server.bypassProxy = true
-                        def buildInfo = server.upload
-                    }
-                }
+                 rtUpload (
+                     serverId: "artifactory",
+                     spec:
+                         """{
+                           "files": [
+                             {
+                               "pattern": "**/target/*.jar",
+                               "target": "**/target/*.jar"
+                             }
+                          ]
+                         }"""
+                 )
             }
         }
 
