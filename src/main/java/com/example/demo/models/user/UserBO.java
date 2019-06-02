@@ -4,11 +4,11 @@ import java.util.Objects;
 
 public class UserBO {
 
-    private long id;
+    protected long id;
 
-    private String name;
+    protected String name;
 
-    private String mail;
+    protected String mail;
 
     public UserBO(){
         super();

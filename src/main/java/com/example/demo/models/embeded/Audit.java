@@ -4,10 +4,11 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Embeddable
-public class Audit {
+public class Audit implements Serializable {
 
     @Column(name = "created_on")
     private LocalDateTime createdOn;

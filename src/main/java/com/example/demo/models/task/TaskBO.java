@@ -6,15 +6,15 @@ import java.time.LocalDateTime;
 
 public class TaskBO {
 
-    private long id;
+    protected long id;
 
-    private String title;
+    protected String title;
 
-    private String content;
+    protected String content;
 
-    private LocalDateTime endAt;
+    protected LocalDateTime endAt;
 
-    private UserEntity author;
+    protected UserEntity author;
 
     public TaskBO(){
         super();
