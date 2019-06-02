@@ -1,5 +1,15 @@
 #!/usr/bin/env groovy
 pipeline {
+
+    def server = Artifactory.server('artifactory')
+    def uploadSpec = """{
+      "files": [
+        {
+          "pattern": "**/target/*.jar",
+          "target": "libs-snapshot-local"
+        }
+     ]
+    }"""
     agent any
     tools {
         maven 'maven'
@@ -44,18 +54,7 @@ pipeline {
             }
         stage('Upload Artifact') {
             steps {
-                 rtUpload (
-                     serverId: "artifactory",
-                     spec:
-                         """{
-                           "files": [
-                             {
-                               "pattern": "**/target/*.jar",
-                               "target": "**/target/*.jar"
-                             }
-                          ]
-                         }"""
-                 )
+                 server.upload(uploadSpec)
             }
         }
         stage ('Publish build info') {
