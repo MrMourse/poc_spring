@@ -49,12 +49,11 @@ pipeline {
                         def server = Artifactory.newServer url: 'http://localhost:8081/artifactory'
                         server.bypassProxy = true
                         def buildInfo = server.upload spec: uploadSpec
-                        }
+                    }
                 }
             }
         }
 
-    }
     post {
             always {
                 cobertura coberturaReportFile: "**/target/site/cobertura/coverage.xml"
@@ -62,4 +61,4 @@ pipeline {
             }
         }
 
-         }
+ }
