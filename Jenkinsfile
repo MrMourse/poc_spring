@@ -39,9 +39,7 @@ pipeline {
             }
         stage('Release') {
                 steps {
-                    dir('**/target') {
-                        archiveArtifacts artifacts: '**', fingerprint: true
-                    }
+                    archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
                 }
             }
 
