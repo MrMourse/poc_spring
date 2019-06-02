@@ -37,6 +37,13 @@ pipeline {
                 }
               }
             }
+        stage('Release') {
+                steps {
+                    dir('**/target') {
+                        archiveArtifacts artifacts: '**', fingerprint: true
+                    }
+                }
+            }
 
     }
     post {
