@@ -1,7 +1,6 @@
 package com.example.demo.repositories;
 
 import com.example.demo.models.user.UserEntity;
-import com.example.demo.repositories.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,8 +39,8 @@ public class UserRepositoryTest {
 
     @Test
     public void testSaveUser(){
-        UserEntity user = new UserEntity("Paul","mail1@gmail.com");
-        UserEntity userSaved =  userRepository.save(user);
+        UserEntity userToSave = new UserEntity("Paul","mail1@gmail.com");
+        UserEntity userSaved =  userRepository.save(userToSave);
         assertEquals("Paul", userSaved.getName());
     }
 

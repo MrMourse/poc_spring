@@ -1,8 +1,6 @@
 package com.example.demo.exceptions;
 
-class ApiValidationError extends ApiSubError {
-    private String field;
-    private Object rejectedValue;
+class ApiValidationError implements ApiSubError {
 
     ApiValidationError(String object, String message) {
     }
