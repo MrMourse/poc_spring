@@ -41,7 +41,6 @@ pipeline {
     }
     post {
             always {
-                junit "**/xunit.xml"
                 cobertura coberturaReportFile: "**/target/site/cobertura/coverage.xml"
                 cleanWs()
                 archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
