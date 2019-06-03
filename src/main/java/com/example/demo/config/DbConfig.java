@@ -21,7 +21,7 @@ import java.util.Properties;
 // Permet la configuration de/des bases de données.
 public class DbConfig {
 
-    private Environment env;
+    private final Environment env;
 
     @Autowired
     public DbConfig(Environment env) {

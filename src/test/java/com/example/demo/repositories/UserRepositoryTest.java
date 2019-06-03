@@ -33,7 +33,7 @@ public class UserRepositoryTest {
     }
     @Test
     public void testFindAllUsers() {
-        List<UserEntity> users = (List<UserEntity>) userRepository.findAll();
+        List<UserEntity> users = userRepository.findAll();
         assertEquals(1, users.size());
     }
 

@@ -7,7 +7,6 @@ import com.example.demo.repositories.UserRepository;
 import org.apache.commons.collections4.IteratorUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -48,8 +47,7 @@ public class UserServiceImpl implements UserService {
     public UserBO saveOrUpdateUser(UserBO user) {
         UserEntity userToSave = UserMapper.INSTANCE.boToEntity(user);
         userToSave = userRepository.save(userToSave);
-        UserBO userBOSaved = UserMapper.INSTANCE.entityToBo(userToSave);
-        return userBOSaved;
+        return UserMapper.INSTANCE.entityToBo(userToSave);
     }
 
     @Override

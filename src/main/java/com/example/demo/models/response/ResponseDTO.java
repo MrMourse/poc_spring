@@ -8,10 +8,10 @@ public class ResponseDTO {
 
     private String message;
 
-    public ResponseDTO(){
+    ResponseDTO(){
         super();
     }
-    public ResponseDTO(StatusJSEND status){
+    ResponseDTO(StatusJSEND status){
         this.status = status;
     }
 

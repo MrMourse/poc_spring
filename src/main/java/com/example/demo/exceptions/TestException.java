@@ -1,6 +1,6 @@
 package com.example.demo.exceptions;
 
-public class TestException extends Exception {
+class TestException extends Exception {
     public TestException() {
     }
 

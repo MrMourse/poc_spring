@@ -74,7 +74,7 @@ public class UserController {
         UserBO userToUpdate = UserMapper.INSTANCE.dtoToBo(user);
         UserBO userInserted = userService.saveOrUpdateUser(userToUpdate);
         UserDTO userToSend = UserMapper.INSTANCE.boToDto(userInserted);
-        ResponseUserDTO response = new ResponseUserDTO(StatusJSEND.SUCCESS, Collections.singletonList(user));
+        ResponseUserDTO response = new ResponseUserDTO(StatusJSEND.SUCCESS, Collections.singletonList(userToSend));
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

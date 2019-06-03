@@ -2,7 +2,6 @@ package com.example.demo.services.user;
 
 import com.example.demo.models.user.UserBO;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 

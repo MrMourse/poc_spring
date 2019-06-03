@@ -2,7 +2,6 @@ package com.example.demo.models.task;
 
 import com.example.demo.models.user.UserEntity;
 
-import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;

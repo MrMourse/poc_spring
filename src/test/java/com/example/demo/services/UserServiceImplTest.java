@@ -9,7 +9,6 @@ import com.example.demo.services.user.UserServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -42,8 +41,8 @@ public class UserServiceImplTest {
     @MockBean //création d'un mockBean pour UserRepository
     private UserRepository userRepository;
 
-    private static String name = "Dupont";
-    private static String mail = "mail1@gmail.com";
+    private static final String name = "Dupont";
+    private static final String mail = "mail1@gmail.com";
 
     private final UserBO userBO = new UserBO(name, mail);
     private final UserEntity user = new UserEntity(name, mail);
