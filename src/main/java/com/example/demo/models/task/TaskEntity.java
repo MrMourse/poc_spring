@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 @Table(name = "TASK")
 public class TaskEntity implements Serializable {
 
+    public static final long serialVersionUID = 7616013285801038751L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 

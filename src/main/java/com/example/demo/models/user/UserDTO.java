@@ -7,6 +7,9 @@ import java.util.Objects;
 
 @XmlRootElement(name = "user")
 public class UserDTO implements Serializable {
+
+    public static final long serialVersionUID = -8259266566722741094L;
+
     private long id;
 
     private String name;

@@ -10,6 +10,8 @@ import java.time.LocalDateTime;
 @Embeddable
 public class Audit implements Serializable {
 
+    public static final long serialVersionUID = 3066404178580360382L;
+
     @Column(name = "created_on")
     private LocalDateTime createdOn;
 

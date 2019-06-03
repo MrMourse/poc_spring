@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 @XmlRootElement(name = "task")
 public class TaskDTO implements Serializable {
 
+    public static final long serialVersionUID = 2010783855604743831L;
+
     private long id;
 
     private String title;
