@@ -112,8 +112,12 @@ public class UserControllerTest {
         //on exécute la requête
         try {
             mockMvc.perform(MockMvcRequestBuilders.put("/users/{id}",1)
-                    .contentType(MediaType.APPLICATION_XML)
-                    .content("<user><name>Test</name></user>"))
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .accept(MediaType.APPLICATION_JSON)
+                    .content("{\n" +
+                            "    \"name\": \"testa\",\n" +
+                            "    \"mail\": \"test@gmail.com\"\n" +
+                            "}"))
                     .andExpect(status().isOk());
         } catch (Exception e) {
             logger.error(e.getMessage());
