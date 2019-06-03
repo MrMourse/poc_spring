@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "TASK")
-public class TaskEntity extends TaskBO implements Serializable {
+public class TaskEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -39,43 +39,43 @@ public class TaskEntity extends TaskBO implements Serializable {
         this.author = author;
         this.audit = audit;
     }
-    @Override
+
     public long getId() {
         return id;
     }
-    @Override
+
     public void setId(long id) {
         this.id = id;
     }
-    @Override
+
     public String getTitle() {
         return title;
     }
-    @Override
+
     public void setTitle(String title) {
         this.title = title;
     }
-    @Override
+
     public String getContent() {
         return content;
     }
-    @Override
+
     public void setContent(String content) {
         this.content = content;
     }
-    @Override
+
     public LocalDateTime getEndAt() {
         return endAt;
     }
-    @Override
+
     public void setEndAt(LocalDateTime endAt) {
         this.endAt = endAt;
     }
-    @Override
+
     public UserEntity getAuthor() {
         return author;
     }
-    @Override
+
     public void setAuthor(UserEntity author) {
         this.author = author;
     }

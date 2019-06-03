@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "USERS")
-public class UserEntity extends UserBO implements Serializable {
+public class UserEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,10 +19,14 @@ public class UserEntity extends UserBO implements Serializable {
     private long id;
 
     @NotNull(message = "Please, inform a name for your user.")
-    private String name = "";
+    private String name;
+
+    private String mail;
 
     @Embedded
     private Audit audit = new Audit();
+
+
 
     public UserEntity() {
         super();
@@ -44,27 +48,27 @@ public class UserEntity extends UserBO implements Serializable {
         this.id = id;
         this.name = name;
     }
-    @Override
+
     public long getId() {
         return id;
     }
-    @Override
+
     public void setId(long id) {
         this.id = id;
     }
-    @Override
+
     public String getName() {
         return name;
     }
-    @Override
+
     public void setName(String name){
         this.name = name;
     }
-    @Override
+
     public String getMail() {
         return mail;
     }
-    @Override
+
     public void setMail(String mail) {
         this.mail = mail;
     }
@@ -75,7 +79,6 @@ public class UserEntity extends UserBO implements Serializable {
     public void setAudit(Audit audit) {
         this.audit = audit;
     }
-
     @Override
     public String toString() {
         return "UserEntity{" +

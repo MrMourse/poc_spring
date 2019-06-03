@@ -6,15 +6,47 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @XmlRootElement(name = "user")
-public class UserDTO extends UserBO implements Serializable  {
+public class UserDTO implements Serializable {
+    private long id;
 
-    @Override
-    @XmlElement
-    public void setName(String name) {
-        super.name = name;
+    private String name;
+
+    private String mail;
+
+    public UserDTO(){
+        super();
     }
 
-    @Override
+    public UserDTO(String name, String mail) {
+        this.name = name;
+        this.mail = mail;
+    }
+
+    public UserDTO(long id, String name, String mail) {
+        this.id = id;
+        this.name = name;
+        this.mail = mail;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+    @XmlElement
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getMail() {
+        return mail;
+    }
     @XmlElement
     public void setMail(String mail) {
         this.mail = mail;
