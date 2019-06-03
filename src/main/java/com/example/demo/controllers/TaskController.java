@@ -34,7 +34,8 @@ public class TaskController {
     public ResponseEntity<ResponseTaskDTO> getAllTasks() {
         List<TaskBO> tasks = taskService.getAllTasks();
         List<TaskDTO> tasksDTO = TaskMapper.INSTANCE.bosToDtos(tasks);
-        logger.info("liste des tâches : " + tasks.toString());
+        String logInfo = String.format("Task list : %1$s.", tasks.toString());
+        logger.info(logInfo);
         ResponseTaskDTO response = new ResponseTaskDTO(StatusJSEND.SUCCESS, tasksDTO);
         return new ResponseEntity<>(response, HttpStatus.FOUND);
     }
@@ -43,7 +44,8 @@ public class TaskController {
     public ResponseEntity<ResponseTaskDTO> getTask(@PathVariable(value = "id") Long id) {
         TaskBO taskToGet = taskService.getTaskById(id);
         TaskDTO taskDTO = TaskMapper.INSTANCE.boToDto(taskToGet);
-        logger.info("UPDATE USER : "+ taskToGet.getTitle());
+        String logInfo = String.format("Task Update : %1$s.", taskToGet.getTitle());
+        logger.info(logInfo);
         ResponseTaskDTO response = new ResponseTaskDTO(StatusJSEND.SUCCESS, Collections.singletonList(taskDTO));
         return new ResponseEntity<>(response, HttpStatus.FOUND);
 
@@ -54,7 +56,8 @@ public class TaskController {
     public ResponseEntity<ResponseTaskDTO> getTaskByTitle(@PathVariable(value = "title") String title) {
         TaskBO taskToGet = taskService.getTaskByTitle(title);
         TaskDTO taskDTO = TaskMapper.INSTANCE.boToDto(taskToGet);
-        logger.info("UPDATE TASK : "+ taskToGet.getTitle());
+        String logInfo = String.format("Task Found : %1$s.", taskToGet.getTitle());
+        logger.info(logInfo);
         ResponseTaskDTO response = new ResponseTaskDTO(StatusJSEND.SUCCESS, Collections.singletonList(taskDTO));
         return new ResponseEntity<>(response, HttpStatus.FOUND);
 
@@ -63,9 +66,10 @@ public class TaskController {
     @PostMapping(value = "")
     public ResponseEntity<ResponseTaskDTO> saveTask(@RequestBody TaskDTO task) {
         TaskBO taskToInsert = TaskMapper.INSTANCE.dtoToBo(task);
-        taskService.saveOrUpdateTask(taskToInsert);
-        logger.info("userSave : " + taskToInsert.toString());
-        ResponseTaskDTO response = new ResponseTaskDTO(StatusJSEND.SUCCESS, Collections.singletonList(task));
+        TaskBO taskInserted = taskService.saveOrUpdateTask(taskToInsert);
+        TaskDTO taskToSend = TaskMapper.INSTANCE.boToDto(taskInserted);
+        logger.info("userSave : " + taskToSend.toString());
+        ResponseTaskDTO response = new ResponseTaskDTO(StatusJSEND.SUCCESS, Collections.singletonList(taskToSend));
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
@@ -74,15 +78,16 @@ public class TaskController {
                                                       @RequestBody TaskDTO task) {
         task.setIdUpdate(id);
         TaskBO taskToUpdate = TaskMapper.INSTANCE.dtoToBo(task);
-        taskService.saveOrUpdateTask(taskToUpdate);
-        ResponseTaskDTO response = new ResponseTaskDTO(StatusJSEND.SUCCESS, Collections.singletonList(task));
+        TaskBO taskUpdated = taskService.saveOrUpdateTask(taskToUpdate);
+        TaskDTO taskToSend = TaskMapper.INSTANCE.boToDto(taskUpdated);
+        ResponseTaskDTO response = new ResponseTaskDTO(StatusJSEND.SUCCESS, Collections.singletonList(taskToSend));
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<ResponseDTO> deleteTask(@PathVariable(value = "id") Long id) {
         taskService.deleteTask(id);
-        ResponseDTO response = new ResponseDTO(StatusJSEND.SUCCESS,"deletion done.");
+        ResponseDTO response = new ResponseDTO(StatusJSEND.SUCCESS,"Deletion done.");
         return new ResponseEntity<>(response,HttpStatus.GONE);
     }
 }

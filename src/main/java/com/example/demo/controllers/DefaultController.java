@@ -1,7 +1,5 @@
 package com.example.demo.controllers;
 
-import com.example.demo.models.user.UserBO;
-import com.example.demo.services.user.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -12,12 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class DefaultController {
 
-    private final UserService userService;
-
     private static final Logger logger = LoggerFactory.getLogger(DefaultController.class);
 
-    public DefaultController(UserService userService) {
-        this.userService = userService;
+    public DefaultController() {
+        super();
     }
 
     @GetMapping(value = "/")

@@ -7,6 +7,7 @@ import com.example.demo.repositories.TaskRepository;
 import org.apache.commons.collections4.IteratorUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -44,10 +45,11 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void saveOrUpdateTask(TaskBO task) {
+    public TaskBO saveOrUpdateTask(TaskBO task) {
         //Check if we make a modification
         TaskEntity taskToSave = TaskMapper.INSTANCE.boToEntity(task);
-        taskRepository.save(taskToSave);
+        taskToSave = taskRepository.save(taskToSave);
+        return TaskMapper.INSTANCE.entityToBo(taskToSave);
     }
 
     @Override

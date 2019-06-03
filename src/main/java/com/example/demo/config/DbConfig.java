@@ -16,7 +16,7 @@ import java.util.Objects;
 import java.util.Properties;
 
 @Configuration
-@EnableJpaRepositories(basePackages = "com.example.demo.repositories")
+@EnableJpaRepositories(basePackages = "**.repositories")
 @PropertySource("classpath:persistence-sqlite.properties")
 // Permet la configuration de/des bases de données.
 public class DbConfig {

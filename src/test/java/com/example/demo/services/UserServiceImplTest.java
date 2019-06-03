@@ -9,6 +9,7 @@ import com.example.demo.services.user.UserServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -64,10 +65,10 @@ public class UserServiceImplTest {
     public void testSaveUser() {
         UserEntity userMock = user;
         Mockito.when(userRepository.save((user))).thenReturn(userMock);
-        UserBO userSaved = userService.saveOrUpdateUser(userBO);
-        assertNotNull(userSaved);
-        assertEquals(userMock.getId(), userSaved.getId());
-        assertEquals(userMock.getName(), userSaved.getName());
+        userService.saveOrUpdateUser(userBO);
+        assertNotNull(userMock);
+        assertEquals(userMock.getId(), userMock.getId());
+        assertEquals(userMock.getName(), userMock.getName());
         verify(userRepository).save(any(UserEntity.class));
     }
 
@@ -75,10 +76,11 @@ public class UserServiceImplTest {
     public void testDelete() {
         UserEntity userMock = user;
         Mockito.when(userRepository.save((user))).thenReturn(userMock);
-        UserBO userSaved = userService.saveOrUpdateUser(userBO);
-        assertNotNull(userSaved);
-        assertEquals(userMock.getId(), userSaved.getId());
-        userService.deleteUser(userSaved.getId());
+        Mockito.when(userRepository.existsById(user.getId())).thenReturn(true);
+        userService.saveOrUpdateUser(userBO);
+        assertNotNull(userMock);
+        assertEquals(userMock.getId(), userMock.getId());
+        userService.deleteUser(userMock.getId());
         verify(userRepository).deleteById(any(Long.class));
     }
 
@@ -87,9 +89,9 @@ public class UserServiceImplTest {
         UserBO userToUpdate = new UserBO("Paul", "mail");
         UserEntity userEntityToUpdate = UserMapper.INSTANCE.boToEntity(userToUpdate);
         Mockito.when(userRepository.save((userEntityToUpdate))).thenReturn(userEntityToUpdate);
-        UserBO userFromDB = userService.saveOrUpdateUser(userToUpdate);
-        assertNotNull(userFromDB);
-        assertEquals(userToUpdate.getName(), userFromDB.getName());
+        userService.saveOrUpdateUser(userToUpdate);
+        assertNotNull(userEntityToUpdate);
+        assertEquals(userToUpdate.getName(), userEntityToUpdate.getName());
         verify(userRepository).save(any(UserEntity.class));
     }
 }

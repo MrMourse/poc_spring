@@ -1,5 +1,9 @@
 package com.example.demo.models.response;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonValue;
+
+@JsonFormat(shape = JsonFormat.Shape.STRING)
 public enum StatusJSEND {
 
     //All went well, and (usually) some data was returned.
@@ -18,6 +22,11 @@ public enum StatusJSEND {
     StatusJSEND(String name){
         this.name = name;
     }
+
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String toString(){
         return name;

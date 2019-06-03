@@ -7,6 +7,7 @@ import com.example.demo.repositories.UserRepository;
 import org.apache.commons.collections4.IteratorUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -45,15 +46,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserBO saveOrUpdateUser(UserBO user) {
-        //Check if we make a modification
         UserEntity userToSave = UserMapper.INSTANCE.boToEntity(user);
-        userRepository.save(userToSave);
-        return user;
+        userToSave = userRepository.save(userToSave);
+        UserBO userBOSaved = UserMapper.INSTANCE.entityToBo(userToSave);
+        return userBOSaved;
     }
 
     @Override
     public void deleteUser(Long id){
-        userRepository.deleteById(id);
+        if (userRepository.existsById(id)){
+            userRepository.deleteById(id);
+        }
+        else{
+            throw new EntityNotFoundException("Didn't find a user with id " + id);
+        }
     }
 
 }

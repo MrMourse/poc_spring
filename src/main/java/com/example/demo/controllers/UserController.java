@@ -60,9 +60,10 @@ public class UserController {
     @PostMapping(value = "")
     public ResponseEntity<ResponseUserDTO> saveUser(@RequestBody UserDTO user) {
         UserBO userToInsert= UserMapper.INSTANCE.dtoToBo(user);
-        userService.saveOrUpdateUser(userToInsert);
-        logger.info("userSave : " + userToInsert.toString());
-        ResponseUserDTO response = new ResponseUserDTO(StatusJSEND.SUCCESS, Collections.singletonList(user));
+        UserBO userInserted = userService.saveOrUpdateUser(userToInsert);
+        UserDTO userToSend = UserMapper.INSTANCE.boToDto(userInserted);
+        logger.info("userSave : " + userInserted.toString());
+        ResponseUserDTO response = new ResponseUserDTO(StatusJSEND.SUCCESS, Collections.singletonList(userToSend));
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
@@ -71,7 +72,8 @@ public class UserController {
                                               @RequestBody UserDTO user) {
         user.setIdUpdate(id);
         UserBO userToUpdate = UserMapper.INSTANCE.dtoToBo(user);
-        userService.saveOrUpdateUser(userToUpdate);
+        UserBO userInserted = userService.saveOrUpdateUser(userToUpdate);
+        UserDTO userToSend = UserMapper.INSTANCE.boToDto(userInserted);
         ResponseUserDTO response = new ResponseUserDTO(StatusJSEND.SUCCESS, Collections.singletonList(user));
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

@@ -1,6 +1,7 @@
 package com.example.demo.services.task;
 
 import com.example.demo.models.task.TaskBO;
+import com.example.demo.models.task.TaskEntity;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface TaskService {
 
     TaskBO getTaskByTitle(String title) ;
 
-    void saveOrUpdateTask(TaskBO task) ;
+    TaskBO saveOrUpdateTask(TaskBO task) ;
 
     void deleteTask(Long id) ;
 
