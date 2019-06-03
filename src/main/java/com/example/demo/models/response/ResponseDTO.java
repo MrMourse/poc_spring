@@ -1,7 +1,8 @@
 package com.example.demo.models.response;
 
-//https://github.com/omniti-labs/jsend
-
+/**
+ * Réponse de l'Api basée sur https://github.com/omniti-labs/jsend
+ */
 public class ResponseDTO {
 
     private StatusJSEND status;

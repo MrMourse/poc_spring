@@ -4,6 +4,9 @@ import com.example.demo.models.task.TaskDTO;
 
 import java.util.List;
 
+/**
+ * Réponse spécifique aux tâches.
+ */
 public class ResponseTaskDTO extends ResponseDTO {
 
     private List<TaskDTO> data;

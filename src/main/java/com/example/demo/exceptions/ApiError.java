@@ -12,13 +12,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Objet de gestion des erreurs.
+ */
 class ApiError {
 
     private HttpStatus status;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
     private LocalDateTime timestamp;
+
     private String message;
+
     private String debugMessage;
+
     private List<ApiSubError> subErrors;
 
     private ApiError() {
@@ -84,7 +91,16 @@ class ApiError {
         this.subErrors = subErrors;
     }
 
-    private void addValidationError(Object object,String field, Object rejectedValue, String message) {
+    /**
+     * Permet l'ajout d'information supplémentaire des causes de l'erreur.
+     *
+     * @param object, l'objet concerné.
+     * @param field, le champs concerné.
+     * @param rejectedValue, la valeur concerné.
+     * @param message, le message d'explication.
+     */
+    private void addValidationError(Object object,String field,
+                                    Object rejectedValue, String message) {
         addSubError(new ApiValidationError(object, field, rejectedValue, message));
     }
 
@@ -121,8 +137,10 @@ class ApiError {
         }
         subErrors.add(subError);
     }
+
     /**
-     * Utility method for adding error of ConstraintViolation. Usually when a @Validated validation fails.
+     * Methode utilitaire pour les violations de contraintes.
+     * Quand une validation échoue.
      *
      * @param cv the ConstraintViolation
      */

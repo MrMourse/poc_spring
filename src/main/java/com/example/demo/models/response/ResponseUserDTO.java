@@ -4,6 +4,9 @@ import com.example.demo.models.user.UserDTO;
 
 import java.util.List;
 
+/**
+ * Réponse spécifique aux utilisateurs.
+ */
 public class ResponseUserDTO extends ResponseDTO {
 
     private List<UserDTO> data;

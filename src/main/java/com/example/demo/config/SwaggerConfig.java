@@ -10,6 +10,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * Lien du swagger : //http://localhost:8080/swagger-ui.html
+ * Permet la configuration du swagger.
  */
 @Configuration
 @EnableSwagger2

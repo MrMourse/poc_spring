@@ -15,10 +15,12 @@ import javax.sql.DataSource;
 import java.util.Objects;
 import java.util.Properties;
 
+/**
+ * Permet la configuration de/des bases de données.
+ */
 @Configuration
 @EnableJpaRepositories(basePackages = "**.repositories")
 @PropertySource("classpath:persistence-sqlite.properties")
-// Permet la configuration de/des bases de données.
 public class DbConfig {
 
     private final Environment env;
@@ -30,6 +32,7 @@ public class DbConfig {
 
     /**
      * Configure l'accès à la bdd.
+     *
      * @return DataSource
      */
     @Bean
@@ -44,6 +47,7 @@ public class DbConfig {
 
     /**
      * Spécifie les classes à prendre en compte.
+     *
      * @return LocalContainerEntityManagerFactoryBean
      */
     @Bean
@@ -58,6 +62,7 @@ public class DbConfig {
 
     /**
      * Lie les propriétés relatives au dialogue avec Sqlite.
+     *
      * @return Properties
      */
     private Properties additionalProperties() {

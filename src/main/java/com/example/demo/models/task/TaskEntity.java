@@ -7,6 +7,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+/**
+ * Objet Entity task, il fait le lien avec la base de données.
+ */
 @Entity
 @Table(name = "TASK")
 public class TaskEntity implements Serializable {

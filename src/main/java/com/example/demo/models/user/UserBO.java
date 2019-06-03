@@ -1,7 +1,9 @@
 package com.example.demo.models.user;
 
 import java.util.Objects;
-
+/**
+ * Business Object user, il permet d'effectuer les divers traitements liés aux règles métiers.
+ */
 public class UserBO {
 
     private long id;

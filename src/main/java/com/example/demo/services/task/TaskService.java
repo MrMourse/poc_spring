@@ -5,6 +5,9 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
 
+/**
+ * Service task permettant la gestion de la couche métier.
+ */
 @Configuration
 public interface TaskService {
 

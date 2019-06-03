@@ -7,6 +7,10 @@ import javax.persistence.PreUpdate;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+/**
+ * Objet importable permettant le suivi des créations, modifications.
+ * Sert principalement pour des optimisations.
+ */
 @Embeddable
 public class Audit implements Serializable {
 

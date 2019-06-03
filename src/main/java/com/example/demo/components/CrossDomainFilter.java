@@ -11,6 +11,7 @@ import java.io.IOException;
 
 /**
  * https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/filter/OncePerRequestFilter.html
+ * Permet le cross domain.
  */
 @Component
 public class CrossDomainFilter extends OncePerRequestFilter {
@@ -18,6 +19,7 @@ public class CrossDomainFilter extends OncePerRequestFilter {
     /**
      * This doFilter implementation stores a request attribute for "already filtered",
      * proceeding without filtering again if the attribute is already there.
+     *
      * @param httpServletRequest, the ServletRequest object contains the client's request.
      * @param httpServletResponse, the ServletResponse object contains the filter's response
      * @param filterChain, the FilterChain for invoking the next filter or the resource

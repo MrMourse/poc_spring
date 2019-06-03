@@ -2,17 +2,20 @@ package com.example.demo.models.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+/**
+ * Objet regroupant les divers status JSEND possibles.
+ */
 @JsonFormat(shape = JsonFormat.Shape.STRING)
 public enum StatusJSEND {
 
-    //All went well, and (usually) some data was returned.
+    //Tout s'est bien passé
     SUCCESS ("success"),
 
-    //There was a problem with the data submitted,
-    //or some pre-condition of the API call wasn't satisfied
+    //Il y a eu un problème
+    //ou une condition non satisfaite.
     FAIL ("fail"),
 
-    //An error occurred in processing the request, i.e. an exception was thrown
+    //Une erreur est apparue.
     ERROR ("error");
 
     private final String name;

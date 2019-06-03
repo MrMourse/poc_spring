@@ -5,11 +5,11 @@ import org.hibernate.dialect.identity.IdentityColumnSupport;
 
 import java.sql.Types;
 
+/**
+ * Permet le mapping entre hibernate et Sqlite
+ */
 public class SQLiteDialect extends Dialect {
 
-    /**
-     * Permet le mapping entre hibernate et Sqlite
-     */
     public SQLiteDialect() {
         String integer = "integer";
         registerColumnType(Types.BIT, integer);

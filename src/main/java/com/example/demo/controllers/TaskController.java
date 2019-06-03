@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Permet la mise à disposition des services gérant les tâches.
+ */
 @Controller
 @CrossOrigin(origins = "http://localhost:8080", maxAge = 3600)
 @RequestMapping("/tasks")
@@ -41,6 +44,7 @@ public class TaskController {
     /**
      * Permet la récupération de toutes les tâches.
      * En cas d'échec renvoit une liste vide.
+     *
      * @return ResponseEntity<ResponseTaskDTO>
      */
     @GetMapping(value = "")
@@ -57,6 +61,7 @@ public class TaskController {
      *
      * Permet la récupération d'une seule tâche à partir de son id.
      * En cas d'échec renvoit une liste vide.
+     *
      * @param id, id d'une tâche.
      * @return ResponseEntity<ResponseTaskDTO>
      */
@@ -73,6 +78,7 @@ public class TaskController {
     /**
      * Permet la récupération d'une seule tâche à partir de son titre.
      * En cas d'échec renvoit une liste vide.
+     *
      * @param title, titre d'une tâche.
      * @return ResponseEntity<ResponseTaskDTO>
      */
@@ -88,6 +94,7 @@ public class TaskController {
 
     /**
      * Permet la sauvegarde d'une tâche dans la base de données.
+     *
      * @param task, tâche à sauvegarder.
      * @return ResponseEntity<ResponseTaskDTO>
      */
@@ -105,6 +112,7 @@ public class TaskController {
     /**
      * Permet la modification d'une tâche dans la base de données.
      * En cas d'erreur sur l'id, une nouvelle tâche est crée.
+     *
      * @param id, id de la tâche.
      * @param task, la tâche à modifier.
      * @return ResponseEntity<ResponseTaskDTO>
@@ -123,6 +131,7 @@ public class TaskController {
     /**
      * Permet la suppression d'une tâche.
      * En cas d'échec renvoit une liste vide.
+     *
      * @param id, id de la tâche à supprimer.
      * @return ResponseEntity<ResponseDTO>
      */

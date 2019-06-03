@@ -5,6 +5,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Data Transfert Objet user, il fait le lien avec le service extérieur.
+ */
 @XmlRootElement(name = "user")
 public class UserDTO implements Serializable {
 
@@ -79,6 +82,13 @@ public class UserDTO implements Serializable {
                 '}';
     }
 
+    /**
+     * Permet de corriger une erreur dans l'objet à modifier.
+     * Il prend en priorité l'id du paramètre de la requete et s'il est différent de l'objet.
+     * On le modifie avec l'id du paramètre de la la requete.
+     *
+     * @param id, l'id de l'objet à modifier.
+     */
     public void setIdUpdate(Long id){
         if (this.getId() != id){
             this.setId(id);

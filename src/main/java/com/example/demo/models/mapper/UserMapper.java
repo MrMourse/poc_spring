@@ -8,16 +8,24 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
+/**
+ * Mapper entre les différents objets concernant les utilisateurs.
+ */
 @Mapper
 public abstract class UserMapper {
 
     public static final UserMapper INSTANCE = Mappers.getMapper( UserMapper.class );
 
     public abstract UserBO entityToBo(UserEntity user);
+
     public abstract UserEntity boToEntity(UserBO user);
+
     public abstract List<UserBO> entitiesToBos(List<UserEntity> users);
+
     public abstract UserDTO boToDto(UserBO user);
+
     public abstract UserBO dtoToBo(UserDTO user);
+
     public abstract List<UserDTO> bosToDtos(List<UserBO> users);
 
 }

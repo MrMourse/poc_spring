@@ -30,8 +30,8 @@ public class UserServiceImplTest {
     static class UserServiceImplTestContextConfiguration {
 
         @Bean//bean de service
-        public UserService userService () {
-            return new UserServiceImpl();
+        public UserService userService (UserRepository userRepository) {
+            return new UserServiceImpl(userRepository);
         }
     }
 

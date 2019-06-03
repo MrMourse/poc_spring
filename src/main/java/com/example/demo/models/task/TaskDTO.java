@@ -7,7 +7,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-
+/**
+ * Data Transfert Objet task, il fait le lien avec le service extérieur.
+ */
 @XmlRootElement(name = "task")
 public class TaskDTO implements Serializable {
 
@@ -77,6 +79,14 @@ public class TaskDTO implements Serializable {
                 ", author=" + author +
                 '}';
     }
+
+    /**
+     * Permet de corriger une erreur dans l'objet à modifier.
+     * Il prend en priorité l'id du paramètre de la requete et s'il est différent de l'objet.
+     * On le modifie avec l'id du paramètre de la la requete.
+     *
+     * @param id, l'id de l'objet à modifier.
+     */
     public void setIdUpdate(Long id){
         if (this.getId() != id){
             this.setId(id);

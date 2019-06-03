@@ -7,7 +7,9 @@ import javax.validation.constraints.NotNull;
 
 import java.io.Serializable;
 
-
+/**
+ * Objet Entity user, il fait le lien avec la base de données.
+ */
 @Entity
 @Table(name = "USERS")
 public class UserEntity implements Serializable {
@@ -21,14 +23,12 @@ public class UserEntity implements Serializable {
     private long id;
 
     @NotNull(message = "Please, inform a name for your user.")
-    private String name;
+    private String name = "";
 
     private String mail;
 
     @Embedded
     private Audit audit = new Audit();
-
-
 
     public UserEntity() {
         super();
@@ -41,7 +41,8 @@ public class UserEntity implements Serializable {
         this.name = name;
     }
 
-    public UserEntity(@NotNull(message = "Please, inform a name for your user.") String name, String mail) {
+    public UserEntity(@NotNull(message = "Please, inform a name for your user.") String name,
+                      String mail) {
         this.name = name;
         this.mail = mail;
     }

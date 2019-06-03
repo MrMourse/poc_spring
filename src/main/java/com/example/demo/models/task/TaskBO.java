@@ -4,6 +4,9 @@ import com.example.demo.models.user.UserEntity;
 
 import java.time.LocalDateTime;
 
+/**
+ * Business Object task, il permet d'effectuer les divers traitements liés aux règles métiers.
+ */
 public class TaskBO {
 
     private long id;

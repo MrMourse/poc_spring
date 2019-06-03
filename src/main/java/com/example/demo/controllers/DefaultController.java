@@ -7,6 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+/**
+ * Permet la mise à disposition des services généraux.
+ */
 @Controller
 public class DefaultController {
 
@@ -17,8 +20,8 @@ public class DefaultController {
     }
 
     /**
-     *
      * Vérifie la disponibilité des services.
+     *
      * @return ResponseEntity<String>
      */
     @GetMapping(value = "/")

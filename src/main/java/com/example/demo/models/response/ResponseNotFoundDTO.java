@@ -2,7 +2,11 @@ package com.example.demo.models.response;
 
 import java.util.List;
 
+/**
+ * Réponse spécifique pour les données non trouvées.
+ */
 public class ResponseNotFoundDTO extends ResponseDTO {
+
     private List<Object> data;
 
     public ResponseNotFoundDTO() {

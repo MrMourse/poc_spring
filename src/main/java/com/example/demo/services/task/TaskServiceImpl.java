@@ -11,6 +11,9 @@ import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Implémentation du service task permettant la gestion de la couche métier.
+ */
 @Service(value = "taskService")
 public class TaskServiceImpl implements TaskService {
 
@@ -24,6 +27,10 @@ public class TaskServiceImpl implements TaskService {
         this.taskRepository = taskRepository;
     }
 
+    /**
+     * Récupère toutes les tâches
+     * @return List<TaskBO>
+     */
     @Override
     public List<TaskBO> getAllTasks() {
         List<TaskEntity> taskEntitiesFound
@@ -31,6 +38,11 @@ public class TaskServiceImpl implements TaskService {
         return TaskMapper.INSTANCE.entitiesToBos(taskEntitiesFound);
     }
 
+    /**
+     * Récupère la tâche avec l'id correspondant.
+     * @param id, de la tâche.
+     * @return TaskBO
+     */
     @Override
     public TaskBO getTaskById(Long id) {
         Optional<TaskEntity> taskFound = taskRepository.findById(id);
@@ -40,6 +52,11 @@ public class TaskServiceImpl implements TaskService {
         return TaskMapper.INSTANCE.entityToBo(taskFound.get());
     }
 
+    /**
+     * Récupère la tâche avec le titre correspondant.
+     * @param title, de la tâche.
+     * @return TaskBO
+     */
     @Override
     public TaskBO getTaskByTitle(String title){
         Optional<TaskEntity> taskFound = taskRepository.findByTitle(title);
@@ -49,6 +66,11 @@ public class TaskServiceImpl implements TaskService {
         return TaskMapper.INSTANCE.entityToBo(taskFound.get());
     }
 
+    /**
+     * Sauvegarde la tâche.
+     * @param task, la tâche à sauvegarder.
+     * @return TaskBO
+     */
     @Override
     public TaskBO saveOrUpdateTask(TaskBO task) {
         TaskEntity taskToSave = TaskMapper.INSTANCE.boToEntity(task);
@@ -56,6 +78,10 @@ public class TaskServiceImpl implements TaskService {
         return TaskMapper.INSTANCE.entityToBo(taskToSave);
     }
 
+    /**
+     * Supprime la tâche.
+     * @param id, de la tâche à supprimer.
+     */
     @Override
     public void deleteTask(Long id){
         if (taskRepository.existsById(id)){
