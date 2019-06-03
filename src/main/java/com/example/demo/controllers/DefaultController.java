@@ -16,8 +16,12 @@ public class DefaultController {
         super();
     }
 
+    /**
+     *
+     * Vérifie la disponibilité des services.
+     * @return ResponseEntity<String>
+     */
     @GetMapping(value = "/")
-    //Verification de la disponibilité des services.
     public ResponseEntity<String> pong() {
         logger.info("Boot services OK .....");
         return new ResponseEntity<>("Server : " + HttpStatus.OK.name(), HttpStatus.OK);

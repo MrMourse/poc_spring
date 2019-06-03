@@ -5,7 +5,6 @@ import com.example.demo.models.task.TaskBO;
 import com.example.demo.models.task.TaskEntity;
 import com.example.demo.repositories.TaskRepository;
 import org.apache.commons.collections4.IteratorUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -15,8 +14,15 @@ import java.util.Optional;
 @Service(value = "taskService")
 public class TaskServiceImpl implements TaskService {
 
-    @Autowired
     private TaskRepository taskRepository;
+
+    /**
+     * Initialisation du task repository.
+     * @param taskRepository, service de gestion des taches pour la couche de la base de données.
+     */
+    public TaskServiceImpl(TaskRepository taskRepository) {
+        this.taskRepository = taskRepository;
+    }
 
     @Override
     public List<TaskBO> getAllTasks() {
@@ -52,7 +58,12 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public void deleteTask(Long id){
+        if (taskRepository.existsById(id)){
             taskRepository.deleteById(id);
+        }
+        else{
+            throw new EntityNotFoundException("Didn't find a task with id " + id);
+        }
     }
 
 }

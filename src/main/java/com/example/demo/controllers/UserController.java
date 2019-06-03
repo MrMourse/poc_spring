@@ -22,14 +22,26 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/users")
 public class UserController {
 
+    /**
+     * Permet l'utilisation de logBack à travers le logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private final UserService userService;
 
+    /**
+     * Initialisation du user service.
+     * @param userService, service de gestion d'utilisateur.
+     */
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
+    /**
+     * Permet la récupération de tous les utilisateurs.
+     * En cas d'échec renvoit une liste vide.
+     * @return ResponseEntity<ResponseUserDTO>
+     */
     @GetMapping(value = "")
     public ResponseEntity<ResponseUserDTO> getAllUsers() {
         List<UserBO> users = userService.getAllUsers();
@@ -40,26 +52,45 @@ public class UserController {
         return new ResponseEntity<>(response, HttpStatus.FOUND);
     }
 
+    /**
+     * Permet la récupération d'un seul utilisateur à partir de son id.
+     * En cas d'échec renvoit une liste vide.
+     * @param id, id de l'utilisateur.
+     * @return ResponseEntity<ResponseUserDTO
+     */
     @GetMapping(value = "/{id}")
     public ResponseEntity<ResponseUserDTO> getUser(@PathVariable(value = "id") Long id) {
         UserBO userToGet = userService.getUserById(id);
         UserDTO userDTO = UserMapper.INSTANCE.boToDto(userToGet);
         String logInfo = String.format("User Found By Id : %1$s.", userDTO.toString());
         logger.info(logInfo);
-        ResponseUserDTO response = new ResponseUserDTO(StatusJSEND.SUCCESS, Collections.singletonList(userDTO));
+        ResponseUserDTO response = new ResponseUserDTO(StatusJSEND.SUCCESS,
+                Collections.singletonList(userDTO));
         return new ResponseEntity<>(response, HttpStatus.FOUND);
     }
 
+    /**
+     * Permet la récupération d'un seul utilisateur à partir de son nom.
+     * En cas d'échec renvoit une liste vide.
+     * @param name, nom de l'utilisateur
+     * @return ResponseEntity<ResponseUserDTO>
+     */
     @GetMapping(value = "/name/{name}")
     public ResponseEntity<ResponseUserDTO> getUserByName(@PathVariable(value = "name") String name) {
         UserBO userToGet = userService.getUserByName(name);
         UserDTO userDTO = UserMapper.INSTANCE.boToDto(userToGet);
         String logInfo = String.format("User Found By Name : %1$s.", userDTO.toString());
         logger.info(logInfo);
-        ResponseUserDTO response = new ResponseUserDTO(StatusJSEND.SUCCESS, Collections.singletonList(userDTO));
+        ResponseUserDTO response = new ResponseUserDTO(StatusJSEND.SUCCESS,
+                Collections.singletonList(userDTO));
         return new ResponseEntity<>(response, HttpStatus.FOUND);
     }
 
+    /**
+     * Permet la sauvegarde d'un utilisateur dans la base de données.
+     * @param user, l'utilisateur à sauvegarder.
+     * @return ResponseEntity<ResponseUserDTO>
+     */
     @PostMapping(value = "")
     public ResponseEntity<ResponseUserDTO> saveUser(@RequestBody UserDTO user) {
         UserBO userToInsert= UserMapper.INSTANCE.dtoToBo(user);
@@ -71,6 +102,13 @@ public class UserController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
+    /**
+     * Permet la modification d'un utilisateur dans la base de données.
+     * En cas d'erreur sur l'id, une nouvel utilisateur est créé.
+     * @param id, de l'utilisateur à modifier.
+     * @param user, utilisateur à modifier.
+     * @return ResponseEntity<ResponseUserDTO>
+     */
     @PutMapping(value = "/{id}")
     public ResponseEntity<ResponseUserDTO> updateUser(@PathVariable(value = "id") Long id,
                                               @RequestBody UserDTO user) {
@@ -82,6 +120,12 @@ public class UserController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    /**
+     * Permet la suppression d'un utilisateur.
+     * En cas d'échec renvoit une liste vide.
+     * @param id, de l'utilisateur à supprimer.
+     * @return ResponseEntity<ResponseDTO>
+     */
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<ResponseDTO> deleteUser(@PathVariable(value = "id") Long id) {
         userService.deleteUser(id);

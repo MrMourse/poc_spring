@@ -28,6 +28,10 @@ public class DbConfig {
         this.env = env;
     }
 
+    /**
+     * Configure l'accès à la bdd.
+     * @return DataSource
+     */
     @Bean
     public DataSource dataSource() {
         final DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -38,6 +42,10 @@ public class DbConfig {
         return dataSource;
     }
 
+    /**
+     * Spécifie les classes à prendre en compte.
+     * @return LocalContainerEntityManagerFactoryBean
+     */
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
@@ -48,6 +56,10 @@ public class DbConfig {
         return em;
     }
 
+    /**
+     * Lie les propriétés relatives au dialogue avec Sqlite.
+     * @return Properties
+     */
     private Properties additionalProperties() {
         final Properties hibernateProperties = new Properties();
         String hbm = "hibernate.hbm2ddl.auto";

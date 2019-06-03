@@ -22,14 +22,27 @@ import java.util.List;
 @RequestMapping("/tasks")
 public class TaskController {
 
-    private static final Logger logger = LoggerFactory.getLogger(TaskController.class);
+    /**
+     * Permet l'utilisation de logBack à travers le logger.
+     */
+    private static final Logger logger =
+            LoggerFactory.getLogger(TaskController.class);
 
     private final TaskService taskService;
 
+    /**
+     * Initialisation du task service.
+     * @param taskService, service gérant les tâches.
+     */
     public TaskController(TaskService taskService) {
         this.taskService = taskService;
     }
 
+    /**
+     * Permet la récupération de toutes les tâches.
+     * En cas d'échec renvoit une liste vide.
+     * @return ResponseEntity<ResponseTaskDTO>
+     */
     @GetMapping(value = "")
     public ResponseEntity<ResponseTaskDTO> getAllTasks() {
         List<TaskBO> tasks = taskService.getAllTasks();
@@ -40,6 +53,13 @@ public class TaskController {
         return new ResponseEntity<>(response, HttpStatus.FOUND);
     }
 
+    /**
+     *
+     * Permet la récupération d'une seule tâche à partir de son id.
+     * En cas d'échec renvoit une liste vide.
+     * @param id, id d'une tâche.
+     * @return ResponseEntity<ResponseTaskDTO>
+     */
     @GetMapping(value = "/{id}")
     public ResponseEntity<ResponseTaskDTO> getTask(@PathVariable(value = "id") Long id) {
         TaskBO taskToGet = taskService.getTaskById(id);
@@ -48,10 +68,14 @@ public class TaskController {
         logger.info(logInfo);
         ResponseTaskDTO response = new ResponseTaskDTO(StatusJSEND.SUCCESS, Collections.singletonList(taskDTO));
         return new ResponseEntity<>(response, HttpStatus.FOUND);
-
-
     }
 
+    /**
+     * Permet la récupération d'une seule tâche à partir de son titre.
+     * En cas d'échec renvoit une liste vide.
+     * @param title, titre d'une tâche.
+     * @return ResponseEntity<ResponseTaskDTO>
+     */
     @GetMapping(value = "/title/{title}")
     public ResponseEntity<ResponseTaskDTO> getTaskByTitle(@PathVariable(value = "title") String title) {
         TaskBO taskToGet = taskService.getTaskByTitle(title);
@@ -60,9 +84,13 @@ public class TaskController {
         logger.info(logInfo);
         ResponseTaskDTO response = new ResponseTaskDTO(StatusJSEND.SUCCESS, Collections.singletonList(taskDTO));
         return new ResponseEntity<>(response, HttpStatus.FOUND);
-
     }
 
+    /**
+     * Permet la sauvegarde d'une tâche dans la base de données.
+     * @param task, tâche à sauvegarder.
+     * @return ResponseEntity<ResponseTaskDTO>
+     */
     @PostMapping(value = "")
     public ResponseEntity<ResponseTaskDTO> saveTask(@RequestBody TaskDTO task) {
         TaskBO taskToInsert = TaskMapper.INSTANCE.dtoToBo(task);
@@ -74,6 +102,13 @@ public class TaskController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
+    /**
+     * Permet la modification d'une tâche dans la base de données.
+     * En cas d'erreur sur l'id, une nouvelle tâche est crée.
+     * @param id, id de la tâche.
+     * @param task, la tâche à modifier.
+     * @return ResponseEntity<ResponseTaskDTO>
+     */
     @PutMapping(value = "/{id}")
     public ResponseEntity<ResponseTaskDTO> updateTask(@PathVariable(value = "id") Long id,
                                                       @RequestBody TaskDTO task) {
@@ -85,6 +120,12 @@ public class TaskController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    /**
+     * Permet la suppression d'une tâche.
+     * En cas d'échec renvoit une liste vide.
+     * @param id, id de la tâche à supprimer.
+     * @return ResponseEntity<ResponseDTO>
+     */
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<ResponseDTO> deleteTask(@PathVariable(value = "id") Long id) {
         taskService.deleteTask(id);
