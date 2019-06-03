@@ -10,12 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
+// Autorise le CROSS DOMAIN.
 public class CrossDomainFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain)
             throws ServletException, IOException {
-        httpServletResponse.addHeader("Access-Control-Allow-Origin", "*"); //toutes les URI sont autorisées
+        // Toutes les URI sont autorisées.
+        httpServletResponse.addHeader("Access-Control-Allow-Origin", "*");
+        // Les requêtes CRUD sont autorisées.
         httpServletResponse.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        // Les requêtes avec header sont autorisées.
         httpServletResponse.addHeader("Access-Control-Allow-Headers", "origin, content-type, accept, x-req");
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }

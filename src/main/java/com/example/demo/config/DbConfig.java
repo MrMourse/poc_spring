@@ -18,10 +18,15 @@ import java.util.Properties;
 @Configuration
 @EnableJpaRepositories(basePackages = "com.example.demo.repositories")
 @PropertySource("classpath:persistence-sqlite.properties")
+// Permet la configuration de/des bases de données.
 public class DbConfig {
 
-    @Autowired
     private Environment env;
+
+    @Autowired
+    public DbConfig(Environment env) {
+        this.env = env;
+    }
 
     @Bean
     public DataSource dataSource() {
@@ -37,7 +42,7 @@ public class DbConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
-        em.setPackagesToScan("com.example.demo.models");
+        em.setPackagesToScan("**/models");
         em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         em.setJpaProperties(additionalProperties());
         return em;

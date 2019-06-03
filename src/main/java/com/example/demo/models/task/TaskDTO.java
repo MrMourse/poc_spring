@@ -76,4 +76,9 @@ public class TaskDTO implements Serializable {
                 ", author=" + author +
                 '}';
     }
+    public void setIdUpdate(Long id){
+        if (this.getId() != id){
+            this.setId(id);
+        }
+    }
 }

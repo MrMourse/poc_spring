@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class DefaultController {
+
     private final UserService userService;
 
     private static final Logger logger = LoggerFactory.getLogger(DefaultController.class);
@@ -20,10 +21,9 @@ public class DefaultController {
     }
 
     @GetMapping(value = "/")
+    //Verification de la disponibilité des services.
     public ResponseEntity<String> pong() {
-        logger.info("Démarrage des services OK .....");
-        userService.saveOrUpdateUser(new UserBO("test","test"));
-        userService.saveOrUpdateUser(new UserBO("test1", "test"));
-        return new ResponseEntity<>("Réponse du serveur: " + HttpStatus.OK.name(), HttpStatus.OK);
+        logger.info("Boot services OK .....");
+        return new ResponseEntity<>("Server : " + HttpStatus.OK.name(), HttpStatus.OK);
     }
 }

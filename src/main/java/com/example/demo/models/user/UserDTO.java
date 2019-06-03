@@ -75,4 +75,10 @@ public class UserDTO implements Serializable {
                 ", mail='" + mail + '\'' +
                 '}';
     }
+
+    public void setIdUpdate(Long id){
+        if (this.getId() != id){
+            this.setId(id);
+        }
+    }
 }

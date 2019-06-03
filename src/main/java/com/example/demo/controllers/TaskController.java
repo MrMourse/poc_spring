@@ -72,9 +72,7 @@ public class TaskController {
     @PutMapping(value = "/{id}")
     public ResponseEntity<ResponseTaskDTO> updateTask(@PathVariable(value = "id") Long id,
                                                       @RequestBody TaskDTO task) {
-        if (id != task.getId()){
-            task.setId(id);
-        }
+        task.setIdUpdate(id);
         TaskBO taskToUpdate = TaskMapper.INSTANCE.dtoToBo(task);
         taskService.saveOrUpdateTask(taskToUpdate);
         ResponseTaskDTO response = new ResponseTaskDTO(StatusJSEND.SUCCESS, Collections.singletonList(task));

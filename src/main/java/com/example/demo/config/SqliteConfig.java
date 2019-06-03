@@ -7,5 +7,6 @@ import org.springframework.context.annotation.PropertySource;
 @Configuration
 @Profile("sqlite")
 @PropertySource("classpath:persistence-sqlite.properties")
+//Permet une configuration plus poussée pour SQLITE
 class SqliteConfig {
 }

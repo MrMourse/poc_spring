@@ -5,6 +5,7 @@ import org.hibernate.dialect.identity.IdentityColumnSupportImpl;
 
 class SQLiteIdentityColumnSupport extends IdentityColumnSupportImpl {
 
+    // Permet le mapping des colonnes pour sqlite.
     @Override
     public boolean supportsIdentityColumns() {
         return true;

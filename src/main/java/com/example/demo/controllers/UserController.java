@@ -69,9 +69,7 @@ public class UserController {
     @PutMapping(value = "/{id}")
     public ResponseEntity<ResponseUserDTO> updateUser(@PathVariable(value = "id") Long id,
                                               @RequestBody UserDTO user) {
-        if (user.getId() != id){
-            user.setId(id);
-        }
+        user.setIdUpdate(id);
         UserBO userToUpdate = UserMapper.INSTANCE.dtoToBo(user);
         userService.saveOrUpdateUser(userToUpdate);
         ResponseUserDTO response = new ResponseUserDTO(StatusJSEND.SUCCESS, Collections.singletonList(user));
