@@ -12,7 +12,7 @@
     <artifactId>demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>demo</name>
-    <!-- Pas d'espace ou de caractères spéciauxdans la description -->
+    <!-- Pas d'espace ou de caractères spéciaux dans la description -->
     <description>Demo-Project</description>
 
     <properties>
