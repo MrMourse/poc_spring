@@ -68,7 +68,8 @@ public class TaskController {
         TaskBO taskToInsert = TaskMapper.INSTANCE.dtoToBo(task);
         TaskBO taskInserted = taskService.saveOrUpdateTask(taskToInsert);
         TaskDTO taskToSend = TaskMapper.INSTANCE.boToDto(taskInserted);
-        logger.info("userSave : " + taskToSend.toString());
+        String logInfo = String.format("Task Saved : %1$s.", taskToSend.toString());
+        logger.info(logInfo);
         ResponseTaskDTO response = new ResponseTaskDTO(StatusJSEND.SUCCESS, Collections.singletonList(taskToSend));
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }

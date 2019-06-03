@@ -64,7 +64,7 @@ class ApiError {
         return message;
     }
 
-    public void setMessage(String message) {
+    void setMessage(String message) {
         this.message = message;
     }
 
@@ -72,7 +72,7 @@ class ApiError {
         return debugMessage;
     }
 
-    public void setDebugMessage(String debugMessage) {
+    void setDebugMessage(String debugMessage) {
         this.debugMessage = debugMessage;
     }
 

@@ -31,7 +31,8 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(RestExceptionHandler.class);
+
+    private static final org.slf4j.Logger loggerInfo = LoggerFactory.getLogger(RestExceptionHandler.class);
     /**
      * Handle MissingServletRequestParameterException. Triggered when a 'required' request parameter is missing.
      *
@@ -120,7 +121,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         ServletWebRequest servletWebRequest = (ServletWebRequest) request;
-        logger.info("{} to {}", servletWebRequest.getHttpMethod(), servletWebRequest.getRequest().getServletPath());
+        loggerInfo.info("{} to {}", servletWebRequest.getHttpMethod(), servletWebRequest.getRequest().getServletPath());
         String error = "Malformed JSON request";
         return buildResponseEntity(new ApiError(HttpStatus.BAD_REQUEST, error, ex));
     }

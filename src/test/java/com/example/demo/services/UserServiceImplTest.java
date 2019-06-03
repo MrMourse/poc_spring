@@ -41,11 +41,11 @@ public class UserServiceImplTest {
     @MockBean //création d'un mockBean pour UserRepository
     private UserRepository userRepository;
 
-    private static final String name = "Dupont";
-    private static final String mail = "mail1@gmail.com";
+    private static final String NAME = "Dupont";
+    private static final String MAIL = "mail1@gmail.com";
 
-    private final UserBO userBO = new UserBO(name, mail);
-    private final UserEntity user = new UserEntity(name, mail);
+    private final UserBO userBO = new UserBO(NAME, MAIL);
+    private final UserEntity user = new UserEntity(NAME, MAIL);
 
     @Test
     public void testFindAllUsers() {
