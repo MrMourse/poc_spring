@@ -11,10 +11,7 @@ import java.time.LocalDateTime;
 
 @XmlRootElement(name = "task")
 public class TaskDTO implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
 
-    @Column(name = "TASK_ID", updatable = false, nullable = false)
     private long id;
 
     private String title;
