@@ -20,6 +20,12 @@ pipeline {
         stage ('Build') {
             steps {
                 sh 'mvn install'
+                step([$class: 'JacocoPublisher',
+                      execPattern: 'target/*.exec',
+                      classPattern: 'target/classes',
+                      sourcePattern: 'src/main/java',
+                      exclusionPattern: 'src/test*'
+                ])
             }
             post {
                 success {
@@ -71,7 +77,6 @@ pipeline {
 
     post {
             always {
-                cobertura coberturaReportFile: "**/target/site/cobertura/coverage.xml"
                 cleanWs()
             }
         }
