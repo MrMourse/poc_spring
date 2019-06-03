@@ -21,6 +21,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * Initialisation du user repository.
+     *
      * @param userRepository, service de gestion des users pour la couche de la base de données.
      */
     public UserServiceImpl(UserRepository userRepository) {
@@ -29,6 +30,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * Récupère toutes les utilisateurs.
+     *
      * @return List<UserBO>
      */
     @Override
@@ -40,6 +42,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * Récupère l'utilisateur avec l'id correspondant.
+     *
      * @param id, de l'utilisateur.
      * @return UserBO
      */
@@ -54,6 +57,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * Récupère l'utilisateur avec le nom correspondant.
+     *
      * @param name, de l'utilisateur.
      * @return UserBO
      */
@@ -68,6 +72,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * Sauvegarde l'utilisateur.
+     *
      * @param user, l'utilisateur à sauvegarder.
      * @return UserBO
      */
@@ -80,6 +85,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * Supprime l'utilisateur.
+     *
      * @param id, de l'utilisateur à supprimer.
      */
     @Override

@@ -21,6 +21,7 @@ public class TaskServiceImpl implements TaskService {
 
     /**
      * Initialisation du task repository.
+     *
      * @param taskRepository, service de gestion des taches pour la couche de la base de données.
      */
     public TaskServiceImpl(TaskRepository taskRepository) {
@@ -28,7 +29,8 @@ public class TaskServiceImpl implements TaskService {
     }
 
     /**
-     * Récupère toutes les tâches
+     * Récupère toutes les tâches.
+     *
      * @return List<TaskBO>
      */
     @Override
@@ -40,6 +42,7 @@ public class TaskServiceImpl implements TaskService {
 
     /**
      * Récupère la tâche avec l'id correspondant.
+     *
      * @param id, de la tâche.
      * @return TaskBO
      */
@@ -54,6 +57,7 @@ public class TaskServiceImpl implements TaskService {
 
     /**
      * Récupère la tâche avec le titre correspondant.
+     *
      * @param title, de la tâche.
      * @return TaskBO
      */
@@ -68,6 +72,7 @@ public class TaskServiceImpl implements TaskService {
 
     /**
      * Sauvegarde la tâche.
+     *
      * @param task, la tâche à sauvegarder.
      * @return TaskBO
      */
@@ -80,6 +85,7 @@ public class TaskServiceImpl implements TaskService {
 
     /**
      * Supprime la tâche.
+     *
      * @param id, de la tâche à supprimer.
      */
     @Override
