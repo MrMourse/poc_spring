@@ -1,5 +1,6 @@
 package com.example.demo.exceptions;
 
+import com.example.demo.models.response.CIErrorCode;
 import com.example.demo.models.response.ResponseNotFoundDTO;
 import com.example.demo.models.response.StatusJSEND;
 import org.slf4j.LoggerFactory;
@@ -194,7 +195,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(EntityNotFoundException.class)
     protected ResponseEntity<Object> handleEntityNotFound(
             EntityNotFoundException ex) {
-        ResponseNotFoundDTO response = new ResponseNotFoundDTO(StatusJSEND.ERROR,
+        ResponseNotFoundDTO response = new ResponseNotFoundDTO(StatusJSEND.ERROR, CIErrorCode.USERNOTFOUND.getName(),
                                     ex.getMessage(), Collections.emptyList());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

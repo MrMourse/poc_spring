@@ -7,6 +7,8 @@ public class ResponseDTO {
 
     private StatusJSEND status;
 
+    private String errorCode;
+
     private String message;
 
     ResponseDTO(){
@@ -18,6 +20,12 @@ public class ResponseDTO {
 
     public ResponseDTO(StatusJSEND status, String message) {
         this.status = status;
+        this.message = message;
+    }
+
+    public ResponseDTO(StatusJSEND status, String errorCode, String message) {
+        this.status = status;
+        this.errorCode = errorCode;
         this.message = message;
     }
 
@@ -35,5 +43,13 @@ public class ResponseDTO {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getErrorCode() {
+        return errorCode;
+    }
+
+    public void setErrorCode(String errorCode) {
+        this.errorCode = errorCode;
     }
 }

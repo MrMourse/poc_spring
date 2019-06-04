@@ -22,6 +22,11 @@ public class ResponseNotFoundDTO extends ResponseDTO {
         super(status, message);
         this.data = data;
     }
+    public ResponseNotFoundDTO(StatusJSEND status, String code, String message, List<Object> data) {
+        super(status, code, message);
+        this.data = data;
+    }
+
 
     public List<Object> getData() {
         return data;
