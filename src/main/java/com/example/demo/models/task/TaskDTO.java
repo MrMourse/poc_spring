@@ -23,7 +23,9 @@ public class TaskDTO implements Serializable {
 
     private LocalDateTime endAt;
 
-    private UserEntity author;
+    private String author;
+
+    private Boolean finished;
 
     public TaskDTO(){
         super();
@@ -61,12 +63,21 @@ public class TaskDTO implements Serializable {
         this.endAt = endAt;
     }
 
-    public UserEntity getAuthor() {
+    public String getAuthor() {
         return author;
     }
     @XmlElement
-    public void setAuthor(UserEntity author) {
+    public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public Boolean getFinished() {
+        return finished;
+    }
+
+    @XmlElement
+    public void setFinished(Boolean finished) {
+        this.finished = finished;
     }
 
     @Override
@@ -76,7 +87,8 @@ public class TaskDTO implements Serializable {
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", endAt=" + endAt +
-                ", author=" + author +
+                ", author='" + author + '\'' +
+                ", finished=" + finished +
                 '}';
     }
 

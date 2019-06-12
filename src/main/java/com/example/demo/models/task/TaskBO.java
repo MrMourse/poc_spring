@@ -17,7 +17,9 @@ public class TaskBO {
 
     private LocalDateTime endAt;
 
-    private UserEntity author;
+    private String author;
+
+    private Boolean finished;
 
     public TaskBO(){
         super();
@@ -55,12 +57,20 @@ public class TaskBO {
         this.endAt = endAt;
     }
 
-    public UserEntity getAuthor() {
+    public String getAuthor() {
         return author;
     }
 
-    public void setAuthor(UserEntity author) {
+    public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public Boolean getFinished() {
+        return finished;
+    }
+
+    public void setFinished(Boolean finished) {
+        this.finished = finished;
     }
 
     @Override
@@ -70,7 +80,8 @@ public class TaskBO {
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", endAt=" + endAt +
-                ", author=" + author +
+                ", author='" + author + '\'' +
+                ", finished=" + finished +
                 '}';
     }
 }

@@ -28,7 +28,9 @@ public class TaskEntity implements Serializable {
 
     private LocalDateTime endAt;
 
-    private UserEntity author;
+    private String author;
+
+    private Boolean finished;
 
     @Embedded
     private Audit audit = new Audit();
@@ -37,12 +39,13 @@ public class TaskEntity implements Serializable {
         super();
     }
 
-    public TaskEntity(String title, String content, LocalDateTime endAt, UserEntity author, Audit audit) {
+    public TaskEntity(String title, String content, LocalDateTime endAt, String author, Audit audit, Boolean finished) {
         this.title = title;
         this.content = content;
         this.endAt = endAt;
         this.author = author;
         this.audit = audit;
+        this.finished = finished;
     }
 
     public long getId() {
@@ -77,11 +80,11 @@ public class TaskEntity implements Serializable {
         this.endAt = endAt;
     }
 
-    public UserEntity getAuthor() {
+    public String getAuthor() {
         return author;
     }
 
-    public void setAuthor(UserEntity author) {
+    public void setAuthor(String author) {
         this.author = author;
     }
 
@@ -93,6 +96,14 @@ public class TaskEntity implements Serializable {
         this.audit = audit;
     }
 
+    public Boolean getFinished() {
+        return finished;
+    }
+
+    public void setFinished(Boolean finished) {
+        this.finished = finished;
+    }
+
     @Override
     public String toString() {
         return "TaskEntity{" +
@@ -100,7 +111,8 @@ public class TaskEntity implements Serializable {
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", endAt=" + endAt +
-                ", author=" + author +
+                ", author='" + author + '\'' +
+                ", finished=" + finished +
                 ", audit=" + audit +
                 '}';
     }
