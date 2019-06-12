@@ -58,7 +58,7 @@ public class UserControllerTest {
         try {
             mockMvc.perform(get("/users/")
                     .contentType(MediaType.APPLICATION_JSON))
-                    .andExpect(status().isFound())    //statut HTTP de la réponse
+                    .andExpect(status().isOk())    //statut HTTP de la réponse
                     .andExpect(jsonPath("$.data").value(hasSize(1)))
                     .andExpect(jsonPath("$.data[0].name").value(user.getName()))
                     .andReturn();
@@ -97,7 +97,7 @@ public class UserControllerTest {
         // on exécute le test
         try {
             mockMvc.perform(MockMvcRequestBuilders.delete("/users/{id}", 1))
-                    .andExpect(status().isGone());
+                    .andExpect(status().isNoContent());
         } catch (Exception e) {
             logger.error(e.getMessage());
         }

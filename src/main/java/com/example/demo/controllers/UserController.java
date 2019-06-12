@@ -12,8 +12,11 @@ import com.example.demo.models.user.UserDTO;
 import com.example.demo.services.user.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.actuate.health.Health;
+import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,9 +24,10 @@ import org.springframework.web.bind.annotation.*;
  * Permet la mise à disposition des services gérant les utilisateurs.
  */
 @Controller
+@Component
 @CrossOrigin(origins = "http://localhost:8080", maxAge = 3600)
 @RequestMapping("/users")
-public class UserController {
+public class UserController implements HealthIndicator {
 
     /**
      * Permet l'utilisation de logBack à travers le logger.
@@ -53,7 +57,7 @@ public class UserController {
         String logInfo = String.format("Users List : %1$s.", users.toString());
         logger.info(logInfo);
         ResponseUserDTO response = new ResponseUserDTO(StatusJSEND.SUCCESS, usersDTO);
-        return new ResponseEntity<>(response, HttpStatus.FOUND);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     /**
@@ -71,7 +75,7 @@ public class UserController {
         logger.info(logInfo);
         ResponseUserDTO response = new ResponseUserDTO(StatusJSEND.SUCCESS,
                 Collections.singletonList(userDTO));
-        return new ResponseEntity<>(response, HttpStatus.FOUND);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     /**
@@ -89,7 +93,7 @@ public class UserController {
         logger.info(logInfo);
         ResponseUserDTO response = new ResponseUserDTO(StatusJSEND.SUCCESS,
                 Collections.singletonList(userDTO));
-        return new ResponseEntity<>(response, HttpStatus.FOUND);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     /**
@@ -139,6 +143,16 @@ public class UserController {
     public ResponseEntity<ResponseDTO> deleteUser(@PathVariable(value = "id") Long id) {
         userService.deleteUser(id);
         ResponseDTO response = new ResponseDTO(StatusJSEND.SUCCESS,"deletion done.");
-        return new ResponseEntity<>(response,HttpStatus.GONE);
+        return new ResponseEntity<>(response,HttpStatus.NO_CONTENT);
+    }
+
+    @Override
+    public Health health() {
+        List<UserBO> users = userService.getAllUsers();
+
+        if(users.isEmpty()) {
+            return Health.down().build();
+        }
+        return Health.up().build();
     }
 }

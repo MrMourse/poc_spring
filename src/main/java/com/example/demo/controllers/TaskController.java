@@ -54,7 +54,7 @@ public class TaskController {
         String logInfo = String.format("Task list : %1$s.", tasks.toString());
         logger.info(logInfo);
         ResponseTaskDTO response = new ResponseTaskDTO(StatusJSEND.SUCCESS, tasksDTO);
-        return new ResponseEntity<>(response, HttpStatus.FOUND);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     /**
@@ -72,7 +72,7 @@ public class TaskController {
         String logInfo = String.format("Task Update : %1$s.", taskToGet.getTitle());
         logger.info(logInfo);
         ResponseTaskDTO response = new ResponseTaskDTO(StatusJSEND.SUCCESS, Collections.singletonList(taskDTO));
-        return new ResponseEntity<>(response, HttpStatus.FOUND);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     /**
@@ -89,7 +89,7 @@ public class TaskController {
         String logInfo = String.format("Task Found : %1$s.", taskToGet.getTitle());
         logger.info(logInfo);
         ResponseTaskDTO response = new ResponseTaskDTO(StatusJSEND.SUCCESS, Collections.singletonList(taskDTO));
-        return new ResponseEntity<>(response, HttpStatus.FOUND);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     /**
@@ -139,6 +139,6 @@ public class TaskController {
     public ResponseEntity<ResponseDTO> deleteTask(@PathVariable(value = "id") Long id) {
         taskService.deleteTask(id);
         ResponseDTO response = new ResponseDTO(StatusJSEND.SUCCESS,"Deletion done.");
-        return new ResponseEntity<>(response,HttpStatus.GONE);
+        return new ResponseEntity<>(response,HttpStatus.NO_CONTENT);
     }
 }
